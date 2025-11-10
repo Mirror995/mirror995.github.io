@@ -197,7 +197,7 @@
     
     <div id="contentContainer" style="display: none;">
       <h3>脚本</h3>
-       <div id="button-container" style="margin: 15px 0; display: flex; gap: 10px;display: none;">
+       <div id="button-container" style="margin: 15px 0; gap: 10px;display: none;">
       <button id="selectAllBtn" style="padding: 8px 16px; background: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer;">
         全选内容
       </button>
@@ -449,7 +449,7 @@ function loadVoices() {
           contentEl.textContent = decryptedContent;
           contentContainerEl.style.display = 'block';
           controlsEl.style.display = 'block';
-          buttonGroup.style.display = 'block';
+          buttonGroup.style.display = 'flex';
           passBox.style.display = 'none';
           
           
