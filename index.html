@@ -194,7 +194,14 @@
       <button id="speakBtn" class="primary">开始朗读</button>
       <button id="stopBtn" style="background: #dc3545; color: white; margin-top: 0.5rem;">停止朗读</button>
     </div>
-
+    <div class="button-container" style="margin: 15px 0; display: flex; gap: 10px;display: none;">
+      <button id="selectAllBtn" style="padding: 8px 16px; background: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer;">
+        全选内容
+      </button>
+      <button id="copyBtn" style="padding: 8px 16px; background: #2196F3; color: white; border: none; border-radius: 4px; cursor: pointer;">
+        复制内容
+      </button>
+    </div>
     <div id="contentContainer" style="display: none;">
       <h3>脚本</h3>
       <div id="content">解密后的内容将显示在这里...</div>
@@ -247,6 +254,42 @@
   </div>
 
   <script>
+      // 添加按钮功能
+      document.addEventListener('DOMContentLoaded', function() {
+          const selectBtn = document.getElementById('selectAllBtn');
+          const copyBtn = document.getElementById('copyBtn');
+          const content = document.getElementById('content');
+          
+          // 全选功能
+          selectBtn.addEventListener('click', function() {
+              const range = document.createRange();
+              range.selectNodeContents(content);
+              const selection = window.getSelection();
+              selection.removeAllRanges();
+              selection.addRange(range);
+          });
+          
+          // 复制功能
+          copyBtn.addEventListener('click', function() {
+              // 先选择内容
+              const range = document.createRange();
+              range.selectNodeContents(content);
+              const selection = window.getSelection();
+              selection.removeAllRanges();
+              selection.addRange(range);
+              
+              // 复制到剪贴板
+              try {
+                  document.execCommand('copy');
+              } catch (err) {
+                  alert('复制失败，请手动复制。');
+              }
+              
+              // 清除选择
+              selection.removeAllRanges();
+          });
+      });
+      
     let voices = [];
     let decryptedContent = '';
     const voiceSelect = document.getElementById('voiceSelect');
@@ -262,6 +305,7 @@
     const securityBtn = document.getElementById('securityBtn');
     const securityModal = document.getElementById('securityModal');
     const closeModal = document.getElementById('closeModal');
+    const buttonGroup = document.getElementById('button-container');
 
 function populateVoices() {
   voices = speechSynthesis.getVoices();
@@ -403,6 +447,8 @@ function loadVoices() {
           contentEl.textContent = decryptedContent;
           contentContainerEl.style.display = 'block';
           controlsEl.style.display = 'block';
+          buttonGroup.style.display = 'block';
+          
           
           decryptStatusEl.textContent = "✅ 解密成功";
           decryptStatusEl.className = 'success';
