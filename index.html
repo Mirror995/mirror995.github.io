@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>邮件朗读</title>
+  <title>文字转语音</title>
   <style>
     body {
       font-family: system-ui, sans-serif;
@@ -20,46 +20,250 @@
       border-radius: 16px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+    h1 {
+      margin: 0;
+    }
+      .security-btn {
+        background: none;
+        border: none;
+        padding: 0.5rem;
+        border-radius: 6px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+        color: #666;
+        width: auto;
+      }
+      .security-btn:hover {
+        background: #f5f5f5;
+        color: #333;
+        transform: scale(1.05);
+      }
     select, input, button {
-      margin-top: 1rem;
+      margin-top: 0.5rem;
       padding: 0.6rem;
       font-size: 1rem;
       border-radius: 6px;
       border: 1px solid #ccc;
+      display: block;
+      width: 100%;
+      box-sizing: border-box;
     }
-    button {
+    button.primary {
       background: #0078ff;
       color: white;
       border: none;
       cursor: pointer;
+      margin-top: 1rem;
     }
     button:disabled {
       background: #aaa;
       cursor: not-allowed;
     }
+    .password-group {
+      margin: 1.5rem 0;
+    }
+    .controls-group {
+      background: #f8f9fa;
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin: 1.5rem 0;
+      border: 1px solid #e9ecef;
+    }
+    .error {
+      color: #d32f2f;
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+    }
+    .success {
+      color: #388e3c;
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+    }
+    #content {
+      white-space: pre-wrap;
+      background: #f8f9fa;
+      padding: 1.5rem;
+      border-radius: 8px;
+      border: 1px solid #e9ecef;
+      margin-top: 1rem;
+      max-height: 400px;
+      overflow-y: auto;
+      line-height: 1.8;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-content {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      max-width: 500px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+    .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+        position: relative;
+      }
+      .modal-close {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: #666;
+        padding: 0;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .modal-close:hover {
+        background: #f5f5f5;
+        border-radius: 50%;
+      }
+    .security-features {
+      margin-top: 1rem;
+    }
+    .security-feature {
+      margin: 1rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+    .security-feature:before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: #388e3c;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>邮件朗读</h1>
-    <p id="content">正在加载内容...</p>
+    <div class="container">
+      <div class="header">
+        <h1>文字转语音</h1>
+        <button class="security-btn" id="securityBtn" title="安全说明">
+            <svg width="20" height="20" viewBox="0 0 18.3691 18.2129" fill="currentColor">
+                    <g>
+                      <rect height="18.2129" opacity="0" width="18.3691" x="0" y="0"/>
+                      <path d="M5.3125 18.2129L12.6855 18.2129C14.4043 18.2129 15.7422 17.7148 16.6211 16.8457C17.5293 15.9473 18.0078 14.6094 18.0078 12.9004L18.0078 5.53711C18.0078 3.82812 17.5293 2.49023 16.6211 1.5918C15.7324 0.703125 14.4043 0.224609 12.6855 0.224609L5.3125 0.224609C3.60352 0.224609 2.25586 0.712891 1.37695 1.5918C0.478516 2.49023 0 3.82812 0 5.53711L0 12.9004C0 14.6094 0.46875 15.9473 1.37695 16.8457C2.26562 17.7246 3.60352 18.2129 5.3125 18.2129ZM5.3125 16.6406C4.10156 16.6406 3.1543 16.3086 2.53906 15.6836C1.9043 15.0586 1.57227 14.1211 1.57227 12.9004L1.57227 5.53711C1.57227 4.31641 1.9043 3.37891 2.53906 2.75391C3.14453 2.13867 4.10156 1.79688 5.3125 1.79688L12.6855 1.79688C13.9062 1.79688 14.8438 2.12891 15.4688 2.75391C16.1035 3.37891 16.4355 4.31641 16.4355 5.53711L16.4355 12.9004C16.4355 14.1211 16.1035 15.0586 15.4688 15.6836C14.8535 16.2988 13.9062 16.6406 12.6855 16.6406Z" fill-opacity="0.85"/>
+                      <path d="M4.86328 11.0449C4.86328 13.5352 6.47461 15.0488 8.76953 15.0488C10.498 15.0488 11.6797 14.3555 12.4707 12.7344C12.9004 11.8945 13.2324 10.8887 13.584 9.72656C13.7305 9.24805 13.9355 8.65234 13.9355 8.38867C13.9355 8.07617 13.7012 7.86133 13.3789 7.86133C13.0078 7.86133 12.793 8.08594 12.5293 8.62305L11.7383 10.293C11.6602 10.4688 11.582 10.5273 11.4941 10.5273C11.377 10.5273 11.3086 10.4492 11.3086 10.2832L11.3086 4.33594C11.3086 3.99414 11.0254 3.71094 10.6836 3.71094C10.3418 3.71094 10.0684 3.99414 10.0684 4.33594L10.0684 8.55469C9.91211 8.51562 9.75586 8.45703 9.58984 8.42773L9.58984 3.50586C9.58984 3.17383 9.31641 2.88086 8.96484 2.88086C8.62305 2.88086 8.33984 3.17383 8.33984 3.50586L8.33984 8.35938C8.17383 8.37891 8.00781 8.39844 7.8418 8.42773L7.8418 3.99414C7.8418 3.65234 7.55859 3.37891 7.2168 3.37891C6.875 3.37891 6.5918 3.65234 6.5918 3.99414L6.5918 8.82812C6.41602 8.90625 6.26953 9.00391 6.11328 9.0918L6.11328 5.77148C6.11328 5.42969 5.83008 5.13672 5.49805 5.13672C5.14648 5.13672 4.86328 5.42969 4.86328 5.77148Z" fill-opacity="0.85"/>
+                    </g>
+                  </svg>
+        </button>
+      </div>
+    
+    <div class="password-group">
+      <label for="passwordInput">密码：</label>
+      <input id="passwordInput" type="password" placeholder="请输入解密密码">
+      <button id="decryptBtn" class="primary">确认</button>
+      <div id="decryptStatus"></div>
+    </div>
 
-    <label for="voiceSelect">选择语音：</label>
-    <select id="voiceSelect"></select>
+    <div id="controls" class="controls-group" style="display: none;">
+      <h3 style="margin-top: 0;">控制</h3>
+      <label for="voiceSelect">语音：</label>
+      <select id="voiceSelect"></select>
 
-    <label for="rateInput">语速：</label>
-    <input id="rateInput" type="number" min="0.5" max="3" step="0.1" value="1">
+      <label for="rateInput">语速：</label>
+      <input id="rateInput" type="number" min="0.5" max="3" step="0.1" value="1">
 
-    <button id="speakBtn" disabled>朗读</button>
+      <button id="speakBtn" class="primary">开始朗读</button>
+      <button id="stopBtn" style="background: #dc3545; color: white; margin-top: 0.5rem;">停止朗读</button>
+    </div>
+
+    <div id="contentContainer" style="display: none;">
+      <h3>脚本</h3>
+      <div id="content">解密后的内容将显示在这里...</div>
+    </div>
+  </div>
+
+  <!-- 安全说明模态框 -->
+  <div class="modal" id="securityModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 style="margin: 0;">安全说明</h2>
+        <button class="modal-close" id="closeModal">&times;</button>
+      </div>
+      <p>本系统采用端到端加密技术保护您的邮件内容，确保数据安全。</p>
+      
+      <div class="security-features">
+        <div class="security-feature">
+          <strong>端到端加密</strong>
+          <p>邮件内容在加密后才存储到服务器，只有使用正确密码才能解密。</p>
+        </div>
+        
+        <div class="security-feature">
+          <strong>AES-256 加密算法</strong>
+          <p>使用行业标准的 AES-256-CBC 加密算法，提供军事级别的数据保护。</p>
+        </div>
+        
+        <div class="security-feature">
+          <strong>PBKDF2 密钥派生</strong>
+          <p>使用 100,000 次迭代的 PBKDF2 算法从密码派生加密密钥，有效抵抗暴力破解。</p>
+        </div>
+        
+        <div class="security-feature">
+          <strong>前端解密</strong>
+          <p>所有解密操作都在您的浏览器中完成，服务器从未接触明文数据。</p>
+        </div>
+        
+        <div class="security-feature">
+          <strong>无密码存储</strong>
+          <p>您的密码不会存储在服务器或本地，每次会话都需要重新输入。</p>
+        </div>
+        
+        <div class="security-feature">
+          <strong>随机盐值和IV</strong>
+          <p>每次加密都生成新的随机盐值和初始化向量，确保相同的明文产生不同的密文。</p>
+        </div>
+      </div>
+      
+      <p><strong>注意：</strong>请妥善保管您的解密密码，如果忘记密码将无法恢复邮件内容。</p>
+    </div>
   </div>
 
   <script>
     let voices = [];
+    let decryptedContent = '';
     const voiceSelect = document.getElementById('voiceSelect');
     const rateInput = document.getElementById('rateInput');
-    const btn = document.getElementById('speakBtn');
+    const decryptBtn = document.getElementById('decryptBtn');
+    const speakBtn = document.getElementById('speakBtn');
+    const stopBtn = document.getElementById('stopBtn');
+    const passwordInput = document.getElementById('passwordInput');
     const contentEl = document.getElementById('content');
+    const controlsEl = document.getElementById('controls');
+    const contentContainerEl = document.getElementById('contentContainer');
+    const decryptStatusEl = document.getElementById('decryptStatus');
+    const securityBtn = document.getElementById('securityBtn');
+    const securityModal = document.getElementById('securityModal');
+    const closeModal = document.getElementById('closeModal');
 
+    // 填充语音列表
     function populateVoices() {
       voices = speechSynthesis.getVoices();
       voiceSelect.innerHTML = '';
@@ -74,33 +278,156 @@
     speechSynthesis.onvoiceschanged = populateVoices;
     populateVoices();
 
+    // AES解密函数
+    async function decryptAES(encryptedData, password) {
+      try {
+        // 将Base64字符串转换为ArrayBuffer
+        const encryptedBuffer = Uint8Array.from(atob(encryptedData), c => c.charCodeAt(0));
+        
+        // 提取盐 (前16字节)
+        const salt = encryptedBuffer.slice(0, 16);
+        
+        // 提取IV (接下来的16字节)
+        const iv = encryptedBuffer.slice(16, 32);
+        
+        // 提取密文 (剩余部分)
+        const ciphertext = encryptedBuffer.slice(32);
+        
+        // 从密码和盐派生密钥
+        const encoder = new TextEncoder();
+        const passwordBuffer = encoder.encode(password);
+        
+        const importedKey = await crypto.subtle.importKey(
+          'raw',
+          passwordBuffer,
+          'PBKDF2',
+          false,
+          ['deriveKey']
+        );
+        
+        const key = await crypto.subtle.deriveKey(
+          {
+            name: 'PBKDF2',
+            salt: salt,
+            iterations: 100000,
+            hash: 'SHA-256'
+          },
+          importedKey,
+          {
+            name: 'AES-CBC',
+            length: 256
+          },
+          false,
+          ['decrypt']
+        );
+        
+        // 解密数据
+        const decryptedBuffer = await crypto.subtle.decrypt(
+          {
+            name: 'AES-CBC',
+            iv: iv
+          },
+          key,
+          ciphertext
+        );
+        
+        // 将解密后的数据转换为字符串
+        const decoder = new TextDecoder();
+        return decoder.decode(decryptedBuffer);
+      } catch (error) {
+        throw new Error('❌ 密码错误');
+      }
+    }
+
+    // 主函数
     async function main() {
       const params = new URLSearchParams(location.search);
       const id = params.get('id');
       if (!id) {
-        contentEl.textContent = "❌ 未提供邮件 ID";
+        decryptStatusEl.textContent = "❌ 未提供邮件 ID";
+        decryptStatusEl.className = 'error';
         return;
       }
 
-      try {
-        const res = await fetch(`./data/${id}.txt`);
-        if (!res.ok) throw new Error("未找到对应内容");
-        const text = await res.text();
-        contentEl.textContent = text;
-        btn.disabled = false;
+      // 解密按钮点击事件
+      decryptBtn.onclick = async () => {
+        const password = passwordInput.value.trim();
+        if (!password) {
+          decryptStatusEl.textContent = "❌ 请输入密码";
+          decryptStatusEl.className = 'error';
+          return;
+        }
 
-        btn.onclick = () => {
-          const utter = new SpeechSynthesisUtterance(text);
-          const selectedVoice = voices[voiceSelect.value];
-          if (selectedVoice) utter.voice = selectedVoice;
-          utter.rate = parseFloat(rateInput.value) || 1;
-          speechSynthesis.cancel();
-          speechSynthesis.speak(utter);
-        };
-      } catch (e) {
-        contentEl.textContent = "⚠️ 无法加载内容：" + e.message;
-      }
+        try {
+          decryptBtn.disabled = true;
+          decryptStatusEl.textContent = "⏳ 正在解密...";
+          decryptStatusEl.className = '';
+
+          const res = await fetch(`./data/${id}.enc`);
+          if (!res.ok) throw new Error("未找到加密文件");
+          const encryptedData = await res.text();
+          
+          decryptedContent = await decryptAES(encryptedData, password);
+          
+          contentEl.textContent = decryptedContent;
+          contentContainerEl.style.display = 'block';
+          controlsEl.style.display = 'block';
+          
+          decryptStatusEl.textContent = "✅ 解密成功";
+          decryptStatusEl.className = 'success';
+          
+        } catch (e) {
+          decryptStatusEl.textContent = "❌ " + e.message;
+          decryptStatusEl.className = 'error';
+          contentContainerEl.style.display = 'none';
+          controlsEl.style.display = 'none';
+        } finally {
+          decryptBtn.disabled = false;
+        }
+      };
+
+      // 朗读按钮点击事件
+      speakBtn.onclick = () => {
+        if (!decryptedContent) {
+          alert('请先解密内容');
+          return;
+        }
+        
+        const utter = new SpeechSynthesisUtterance(decryptedContent);
+        const selectedVoice = voices[voiceSelect.value];
+        if (selectedVoice) utter.voice = selectedVoice;
+        utter.rate = parseFloat(rateInput.value) || 1;
+        speechSynthesis.cancel();
+        speechSynthesis.speak(utter);
+      };
+
+      // 停止朗读按钮
+      stopBtn.onclick = () => {
+        speechSynthesis.cancel();
+      };
     }
+
+    // 安全说明模态框控制
+    securityBtn.onclick = () => {
+      securityModal.style.display = 'flex';
+    };
+
+    closeModal.onclick = () => {
+      securityModal.style.display = 'none';
+    };
+
+    securityModal.onclick = (e) => {
+      if (e.target === securityModal) {
+        securityModal.style.display = 'none';
+      }
+    };
+
+    // 支持按Enter键解密
+    passwordInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        decryptBtn.click();
+      }
+    });
 
     main();
   </script>
