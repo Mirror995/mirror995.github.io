@@ -176,7 +176,7 @@
         </button>
       </div>
     
-    <div class="password-group">
+    <div id="password-group">
       <label for="passwordInput">密码：</label>
       <input id="passwordInput" type="password" placeholder="请输入解密密码">
       <button id="decryptBtn" class="primary">确认</button>
@@ -220,7 +220,7 @@
       <div class="security-features">
         <div class="security-feature">
           <strong>端到端加密</strong>
-          <p>邮件内容在加密后才存储到服务器，只有使用正确密码才能解密。</p>
+          <p>邮件内容在加密后才存储到GitHub服务器，只有使用正确密码才能解密。</p>
         </div>
         
         <div class="security-feature">
@@ -306,6 +306,8 @@
     const securityModal = document.getElementById('securityModal');
     const closeModal = document.getElementById('closeModal');
     const buttonGroup = document.getElementById('button-container');
+    const passBox = document.getElementById('password-group');
+    
 
 function populateVoices() {
   voices = speechSynthesis.getVoices();
@@ -448,6 +450,7 @@ function loadVoices() {
           contentContainerEl.style.display = 'block';
           controlsEl.style.display = 'block';
           buttonGroup.style.display = 'block';
+          passBox.style.display = 'none';
           
           
           decryptStatusEl.textContent = "✅ 解密成功";
