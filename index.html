@@ -263,20 +263,51 @@
     const securityModal = document.getElementById('securityModal');
     const closeModal = document.getElementById('closeModal');
 
-    // 填充语音列表
-    function populateVoices() {
-      voices = speechSynthesis.getVoices();
-      voiceSelect.innerHTML = '';
-      voices.forEach((v, i) => {
-        const opt = document.createElement('option');
-        opt.value = i;
-        opt.textContent = `${v.name} (${v.lang})`;
-        voiceSelect.appendChild(opt);
-      });
-    }
+function populateVoices() {
+  voices = speechSynthesis.getVoices();
+  voiceSelect.innerHTML = '';
+  
+  // 添加默认选项
+  const defaultOpt = document.createElement('option');
+  defaultOpt.value = '';
+  defaultOpt.textContent = '选择语音 (默认)';
+  defaultOpt.disabled = true;
+  defaultOpt.selected = true;
+  voiceSelect.appendChild(defaultOpt);
+  
+  // 过滤并添加语音选项
+  voices.forEach((v, i) => {
+    // 可选：只显示中文语音
+   if (v.lang.includes('zh') || v.lang.includes('cn')) {
+    const opt = document.createElement('option');
+    opt.value = i;
+    opt.textContent = `${v.name} (${v.lang})`;
+    voiceSelect.appendChild(opt);
+     }
+  });
+  
+  // 如果语音列表为空，延迟重试
+  if (voices.length === 0) {
+    setTimeout(populateVoices, 500);
+  }
+}
 
+// 在DOM加载完成后初始化
+document.addEventListener('DOMContentLoaded', function() {
+  loadVoices(); // 新增的加载函数
+  main();
+});
+
+function loadVoices() {
+  populateVoices();
+  if (speechSynthesis.onvoiceschanged !== undefined) {
     speechSynthesis.onvoiceschanged = populateVoices;
-    populateVoices();
+  }
+  document.addEventListener('click', function reloadVoices() {
+    setTimeout(populateVoices, 100);
+    document.removeEventListener('click', reloadVoices);
+  }, { once: true });
+}
 
     // AES解密函数
     async function decryptAES(encryptedData, password) {
