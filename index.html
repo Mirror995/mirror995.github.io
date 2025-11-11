@@ -478,6 +478,9 @@ function loadVoices() {
         
         const utter = new SpeechSynthesisUtterance(decryptedContent);
         const selectedVoice = voices[voiceSelect.value];
+        utter.onend = () => {
+    speechSynthesis.cancel(); // 播放完成后完全停止
+  };
         if (selectedVoice) utter.voice = selectedVoice;
         utter.rate = parseFloat(rateInput.value) || 1;
         speechSynthesis.cancel();
