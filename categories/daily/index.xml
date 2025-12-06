@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>残垣拾遗</title>
-    <link>https://mirror995.github.io/</link>
-    <description>Recent content on 残垣拾遗</description>
+    <title>Daily on 残垣拾遗</title>
+    <link>https://mirror995.github.io/categories/daily/</link>
+    <description>Recent content in Daily on 残垣拾遗</description>
     <generator>Hugo -- 0.152.2</generator>
     <language>zh-cn</language>
     <lastBuildDate>Mon, 06 Oct 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://mirror995.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://mirror995.github.io/categories/daily/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>面、中秋</title>
       <link>https://mirror995.github.io/%E9%9D%A2%E4%B8%AD%E7%A7%8B/</link>
