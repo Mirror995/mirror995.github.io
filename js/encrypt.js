@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
         passInput.style.display = "none";
         btn.style.display = "none";
       } catch (e) {
-        alert("密码错误或内容损坏");
+        alert("密码不对哈。");
         console.error(e);
       }
     });
