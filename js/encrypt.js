@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const text = new TextDecoder().decode(plainBuffer);
 
         plainText.style.display = "block";
-        plainText.innerText = text;
+        plainText.innerHTML = text;
         passInput.style.display = "none";
         btn.style.display = "none";
       } catch (e) {
