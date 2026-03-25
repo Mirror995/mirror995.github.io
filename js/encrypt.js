@@ -69,6 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
         plainText.innerHTML = text;
         passInput.style.display = "none";
         btn.style.display = "none";
+        block.classList.add("decrypted");
       } catch (e) {
         alert("密码不对哈。");
         console.error(e);
