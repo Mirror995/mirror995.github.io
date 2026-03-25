@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>向量及其运算 | 残垣拾遗</title>
+<meta name="keywords" content="Mathematics">
+<meta name="description" content="空间直角坐标系
+右手系
+俯视$xOy$面，若$y$轴正方向可以通过将$x$轴正方向逆时针旋转$\frac{\pi}{2}$得到，则为右手系。
+卦限
+让三个坐标轴将空间分为$8$部分：三个坐标轴正方向确定的空间称为第一卦限，其正下方的空间为第五卦限。分别向这两个卦限的逆时针方向看，各个空间分别是：第二、三、四卦限；第六、七、八卦限。也可用罗马数字 $\text{I},\cdot\cdot\cdot,\text{VIII}$ 简记。
+共线向量基本定理
+设$\vec{a}\neq\vec{0}$，那么向量$\vec{b}$与$\vec{a}$共线的充要条件是：存在唯一实数$λ$，使得$\vec{b}=λ\vec{a}$。
+向量的夹角
+两向量在同一起点时，两条边围成的较小的角为向量的夹角，记作$(\widehat{\vec{a}, \vec{b}})$。$(\widehat{\vec{a}, \vec{b}})\in[0,\pi]$。
+特别地，$(\widehat{\vec{a}, \vec{b}})=0$或$\pi$时，称两向量平行（或共线）；$(\widehat{\vec{a}, \vec{b}})=\frac{\pi}{2}$时称两向量垂直。
+向量的方向角
+非零向量分别与$x,y,z$轴的正方向的夹角为向量的方向角，通常记作$\alpha,\beta,\gamma$。
+方向余弦
+方向角的余弦值称为方向余弦。若向量$\vec{a}=(x,y,z)$，则：
+$$\cos \alpha = \frac{x}{|\vec{a}|}, \quad \cos \beta = \frac{y}{|\vec{a}|}, \quad \cos \gamma = \frac{z}{|\vec{a}|}$$并且：
+$$\cos^2 \alpha &#43; \cos^2 \beta &#43; \cos^2 \gamma = 1$$另外，$(\cos \alpha, \cos \beta, \cos \gamma)=\frac{1}{|\vec{a}|}(x,y,z)=\boxed{\vec{e}_{\vec{a}}}$。其中$\vec{e}_{\vec{a}}$是与$\vec{a}$同方向的单位向量。
+向量的投影
+定义
+设有两个非零向量 $\vec{a}$ 和 $\vec{b}$，夹角为 $\theta$。将 $\vec{a}$ 的终点向 $\vec{b}$ 所在的直线作垂线，从 $\vec{b}$ 的起点到垂足的这段向量，就是投影，记作$\text{Prj}_{\vec{b}}\vec{a}$或 ${(\vec{a})}_{\vec{b}}$。
+$$\text{Prj}_{\vec{b}}\vec{a} = |\vec{a}| \cos \theta$$用坐标计算
+$$\text{Prj}_{\vec{b}}\vec{a} = \frac{\vec{a} \cdot \vec{b}}{|\vec{b}|}$$投影向量
+$$\vec{a}_{\text{proj}} = \left( \frac{\vec{a} \cdot \vec{b}}{|\vec{b}|^2} \right) \vec{b}$$性质
+投影满足分配律，即 $(\vec{a}&#43;\vec{c})$ 在 $\vec{b}$ 上的投影等于各自投影之和。">
+<meta name="author" content="">
+<link rel="canonical" href="https://mirror995.github.io/%E7%AC%94%E8%AE%B0/%E5%90%91%E9%87%8F%E5%8F%8A%E5%85%B6%E8%BF%90%E7%AE%97/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.216bb70c00adacbc0d326564580c738bd55af9abbca1590f7e752351e5d0243f.css" integrity="sha256-IWu3DACtrLwNMmVkWAxzi9Va&#43;au8oVkPfnUjUeXQJD8=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://mirror995.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://mirror995.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://mirror995.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://mirror995.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://mirror995.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://mirror995.github.io/%E7%AC%94%E8%AE%B0/%E5%90%91%E9%87%8F%E5%8F%8A%E5%85%B6%E8%BF%90%E7%AE%97/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            .list::-webkit-scrollbar-thumb {
+                border-color: var(--code-bg);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><script src="/js/encrypt.js"></script>
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      packages: {'[+]': ['ams']}
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+  };
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta property="og:url" content="https://mirror995.github.io/%E7%AC%94%E8%AE%B0/%E5%90%91%E9%87%8F%E5%8F%8A%E5%85%B6%E8%BF%90%E7%AE%97/">
+  <meta property="og:site_name" content="残垣拾遗">
+  <meta property="og:title" content="向量及其运算">
+  <meta property="og:description" content="空间直角坐标系 右手系 俯视$xOy$面，若$y$轴正方向可以通过将$x$轴正方向逆时针旋转$\frac{\pi}{2}$得到，则为右手系。
+卦限 让三个坐标轴将空间分为$8$部分：三个坐标轴正方向确定的空间称为第一卦限，其正下方的空间为第五卦限。分别向这两个卦限的逆时针方向看，各个空间分别是：第二、三、四卦限；第六、七、八卦限。也可用罗马数字 $\text{I},\cdot\cdot\cdot,\text{VIII}$ 简记。
+共线向量基本定理 设$\vec{a}\neq\vec{0}$，那么向量$\vec{b}$与$\vec{a}$共线的充要条件是：存在唯一实数$λ$，使得$\vec{b}=λ\vec{a}$。
+向量的夹角 两向量在同一起点时，两条边围成的较小的角为向量的夹角，记作$(\widehat{\vec{a}, \vec{b}})$。$(\widehat{\vec{a}, \vec{b}})\in[0,\pi]$。
+特别地，$(\widehat{\vec{a}, \vec{b}})=0$或$\pi$时，称两向量平行（或共线）；$(\widehat{\vec{a}, \vec{b}})=\frac{\pi}{2}$时称两向量垂直。
+向量的方向角 非零向量分别与$x,y,z$轴的正方向的夹角为向量的方向角，通常记作$\alpha,\beta,\gamma$。
+方向余弦 方向角的余弦值称为方向余弦。若向量$\vec{a}=(x,y,z)$，则：
+$$\cos \alpha = \frac{x}{|\vec{a}|}, \quad \cos \beta = \frac{y}{|\vec{a}|}, \quad \cos \gamma = \frac{z}{|\vec{a}|}$$并且：
+$$\cos^2 \alpha &#43; \cos^2 \beta &#43; \cos^2 \gamma = 1$$另外，$(\cos \alpha, \cos \beta, \cos \gamma)=\frac{1}{|\vec{a}|}(x,y,z)=\boxed{\vec{e}_{\vec{a}}}$。其中$\vec{e}_{\vec{a}}$是与$\vec{a}$同方向的单位向量。
+向量的投影 定义 设有两个非零向量 $\vec{a}$ 和 $\vec{b}$，夹角为 $\theta$。将 $\vec{a}$ 的终点向 $\vec{b}$ 所在的直线作垂线，从 $\vec{b}$ 的起点到垂足的这段向量，就是投影，记作$\text{Prj}_{\vec{b}}\vec{a}$或 ${(\vec{a})}_{\vec{b}}$。
+$$\text{Prj}_{\vec{b}}\vec{a} = |\vec{a}| \cos \theta$$用坐标计算 $$\text{Prj}_{\vec{b}}\vec{a} = \frac{\vec{a} \cdot \vec{b}}{|\vec{b}|}$$投影向量 $$\vec{a}_{\text{proj}} = \left( \frac{\vec{a} \cdot \vec{b}}{|\vec{b}|^2} \right) \vec{b}$$性质 投影满足分配律，即 $(\vec{a}&#43;\vec{c})$ 在 $\vec{b}$ 上的投影等于各自投影之和。">
+  <meta property="og:locale" content="zh-cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="笔记">
+    <meta property="article:published_time" content="2026-03-21T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-03-21T00:00:00+00:00">
+    <meta property="article:tag" content="Mathematics">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="向量及其运算">
+<meta name="twitter:description" content="空间直角坐标系
+右手系
+俯视$xOy$面，若$y$轴正方向可以通过将$x$轴正方向逆时针旋转$\frac{\pi}{2}$得到，则为右手系。
+卦限
+让三个坐标轴将空间分为$8$部分：三个坐标轴正方向确定的空间称为第一卦限，其正下方的空间为第五卦限。分别向这两个卦限的逆时针方向看，各个空间分别是：第二、三、四卦限；第六、七、八卦限。也可用罗马数字 $\text{I},\cdot\cdot\cdot,\text{VIII}$ 简记。
+共线向量基本定理
+设$\vec{a}\neq\vec{0}$，那么向量$\vec{b}$与$\vec{a}$共线的充要条件是：存在唯一实数$λ$，使得$\vec{b}=λ\vec{a}$。
+向量的夹角
+两向量在同一起点时，两条边围成的较小的角为向量的夹角，记作$(\widehat{\vec{a}, \vec{b}})$。$(\widehat{\vec{a}, \vec{b}})\in[0,\pi]$。
+特别地，$(\widehat{\vec{a}, \vec{b}})=0$或$\pi$时，称两向量平行（或共线）；$(\widehat{\vec{a}, \vec{b}})=\frac{\pi}{2}$时称两向量垂直。
+向量的方向角
+非零向量分别与$x,y,z$轴的正方向的夹角为向量的方向角，通常记作$\alpha,\beta,\gamma$。
+方向余弦
+方向角的余弦值称为方向余弦。若向量$\vec{a}=(x,y,z)$，则：
+$$\cos \alpha = \frac{x}{|\vec{a}|}, \quad \cos \beta = \frac{y}{|\vec{a}|}, \quad \cos \gamma = \frac{z}{|\vec{a}|}$$并且：
+$$\cos^2 \alpha &#43; \cos^2 \beta &#43; \cos^2 \gamma = 1$$另外，$(\cos \alpha, \cos \beta, \cos \gamma)=\frac{1}{|\vec{a}|}(x,y,z)=\boxed{\vec{e}_{\vec{a}}}$。其中$\vec{e}_{\vec{a}}$是与$\vec{a}$同方向的单位向量。
+向量的投影
+定义
+设有两个非零向量 $\vec{a}$ 和 $\vec{b}$，夹角为 $\theta$。将 $\vec{a}$ 的终点向 $\vec{b}$ 所在的直线作垂线，从 $\vec{b}$ 的起点到垂足的这段向量，就是投影，记作$\text{Prj}_{\vec{b}}\vec{a}$或 ${(\vec{a})}_{\vec{b}}$。
+$$\text{Prj}_{\vec{b}}\vec{a} = |\vec{a}| \cos \theta$$用坐标计算
+$$\text{Prj}_{\vec{b}}\vec{a} = \frac{\vec{a} \cdot \vec{b}}{|\vec{b}|}$$投影向量
+$$\vec{a}_{\text{proj}} = \left( \frac{\vec{a} \cdot \vec{b}}{|\vec{b}|^2} \right) \vec{b}$$性质
+投影满足分配律，即 $(\vec{a}&#43;\vec{c})$ 在 $\vec{b}$ 上的投影等于各自投影之和。">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "向量及其运算",
+      "item": "https://mirror995.github.io/%E7%AC%94%E8%AE%B0/%E5%90%91%E9%87%8F%E5%8F%8A%E5%85%B6%E8%BF%90%E7%AE%97/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "向量及其运算",
+  "name": "向量及其运算",
+  "description": "空间直角坐标系 右手系 俯视$xOy$面，若$y$轴正方向可以通过将$x$轴正方向逆时针旋转$\\frac{\\pi}{2}$得到，则为右手系。\n卦限 让三个坐标轴将空间分为$8$部分：三个坐标轴正方向确定的空间称为第一卦限，其正下方的空间为第五卦限。分别向这两个卦限的逆时针方向看，各个空间分别是：第二、三、四卦限；第六、七、八卦限。也可用罗马数字 $\\text{I},\\cdot\\cdot\\cdot,\\text{VIII}$ 简记。\n共线向量基本定理 设$\\vec{a}\\neq\\vec{0}$，那么向量$\\vec{b}$与$\\vec{a}$共线的充要条件是：存在唯一实数$λ$，使得$\\vec{b}=λ\\vec{a}$。\n向量的夹角 两向量在同一起点时，两条边围成的较小的角为向量的夹角，记作$(\\widehat{\\vec{a}, \\vec{b}})$。$(\\widehat{\\vec{a}, \\vec{b}})\\in[0,\\pi]$。\n特别地，$(\\widehat{\\vec{a}, \\vec{b}})=0$或$\\pi$时，称两向量平行（或共线）；$(\\widehat{\\vec{a}, \\vec{b}})=\\frac{\\pi}{2}$时称两向量垂直。\n向量的方向角 非零向量分别与$x,y,z$轴的正方向的夹角为向量的方向角，通常记作$\\alpha,\\beta,\\gamma$。\n方向余弦 方向角的余弦值称为方向余弦。若向量$\\vec{a}=(x,y,z)$，则：\n$$\\cos \\alpha = \\frac{x}{|\\vec{a}|}, \\quad \\cos \\beta = \\frac{y}{|\\vec{a}|}, \\quad \\cos \\gamma = \\frac{z}{|\\vec{a}|}$$并且：\n$$\\cos^2 \\alpha + \\cos^2 \\beta + \\cos^2 \\gamma = 1$$另外，$(\\cos \\alpha, \\cos \\beta, \\cos \\gamma)=\\frac{1}{|\\vec{a}|}(x,y,z)=\\boxed{\\vec{e}_{\\vec{a}}}$。其中$\\vec{e}_{\\vec{a}}$是与$\\vec{a}$同方向的单位向量。\n向量的投影 定义 设有两个非零向量 $\\vec{a}$ 和 $\\vec{b}$，夹角为 $\\theta$。将 $\\vec{a}$ 的终点向 $\\vec{b}$ 所在的直线作垂线，从 $\\vec{b}$ 的起点到垂足的这段向量，就是投影，记作$\\text{Prj}_{\\vec{b}}\\vec{a}$或 ${(\\vec{a})}_{\\vec{b}}$。\n$$\\text{Prj}_{\\vec{b}}\\vec{a} = |\\vec{a}| \\cos \\theta$$用坐标计算 $$\\text{Prj}_{\\vec{b}}\\vec{a} = \\frac{\\vec{a} \\cdot \\vec{b}}{|\\vec{b}|}$$投影向量 $$\\vec{a}_{\\text{proj}} = \\left( \\frac{\\vec{a} \\cdot \\vec{b}}{|\\vec{b}|^2} \\right) \\vec{b}$$性质 投影满足分配律，即 $(\\vec{a}+\\vec{c})$ 在 $\\vec{b}$ 上的投影等于各自投影之和。\n",
+  "keywords": [
+    "Mathematics"
+  ],
+  "articleBody": "空间直角坐标系 右手系 俯视$xOy$面，若$y$轴正方向可以通过将$x$轴正方向逆时针旋转$\\frac{\\pi}{2}$得到，则为右手系。\n卦限 让三个坐标轴将空间分为$8$部分：三个坐标轴正方向确定的空间称为第一卦限，其正下方的空间为第五卦限。分别向这两个卦限的逆时针方向看，各个空间分别是：第二、三、四卦限；第六、七、八卦限。也可用罗马数字 $\\text{I},\\cdot\\cdot\\cdot,\\text{VIII}$ 简记。\n共线向量基本定理 设$\\vec{a}\\neq\\vec{0}$，那么向量$\\vec{b}$与$\\vec{a}$共线的充要条件是：存在唯一实数$λ$，使得$\\vec{b}=λ\\vec{a}$。\n向量的夹角 两向量在同一起点时，两条边围成的较小的角为向量的夹角，记作$(\\widehat{\\vec{a}, \\vec{b}})$。$(\\widehat{\\vec{a}, \\vec{b}})\\in[0,\\pi]$。\n特别地，$(\\widehat{\\vec{a}, \\vec{b}})=0$或$\\pi$时，称两向量平行（或共线）；$(\\widehat{\\vec{a}, \\vec{b}})=\\frac{\\pi}{2}$时称两向量垂直。\n向量的方向角 非零向量分别与$x,y,z$轴的正方向的夹角为向量的方向角，通常记作$\\alpha,\\beta,\\gamma$。\n方向余弦 方向角的余弦值称为方向余弦。若向量$\\vec{a}=(x,y,z)$，则：\n$$\\cos \\alpha = \\frac{x}{|\\vec{a}|}, \\quad \\cos \\beta = \\frac{y}{|\\vec{a}|}, \\quad \\cos \\gamma = \\frac{z}{|\\vec{a}|}$$并且：\n$$\\cos^2 \\alpha + \\cos^2 \\beta + \\cos^2 \\gamma = 1$$另外，$(\\cos \\alpha, \\cos \\beta, \\cos \\gamma)=\\frac{1}{|\\vec{a}|}(x,y,z)=\\boxed{\\vec{e}_{\\vec{a}}}$。其中$\\vec{e}_{\\vec{a}}$是与$\\vec{a}$同方向的单位向量。\n向量的投影 定义 设有两个非零向量 $\\vec{a}$ 和 $\\vec{b}$，夹角为 $\\theta$。将 $\\vec{a}$ 的终点向 $\\vec{b}$ 所在的直线作垂线，从 $\\vec{b}$ 的起点到垂足的这段向量，就是投影，记作$\\text{Prj}_{\\vec{b}}\\vec{a}$或 ${(\\vec{a})}_{\\vec{b}}$。\n$$\\text{Prj}_{\\vec{b}}\\vec{a} = |\\vec{a}| \\cos \\theta$$用坐标计算 $$\\text{Prj}_{\\vec{b}}\\vec{a} = \\frac{\\vec{a} \\cdot \\vec{b}}{|\\vec{b}|}$$投影向量 $$\\vec{a}_{\\text{proj}} = \\left( \\frac{\\vec{a} \\cdot \\vec{b}}{|\\vec{b}|^2} \\right) \\vec{b}$$性质 投影满足分配律，即 $(\\vec{a}+\\vec{c})$ 在 $\\vec{b}$ 上的投影等于各自投影之和。\n数量积（点积、内积） 以三维为例，对于两个非零向量$\\vec{a},\\vec{b}$：\n$\\vec{a}\\cdot\\vec{b}=|\\vec{a}|\\text{Prj}_{\\vec{a}}\\vec{b}=|\\vec{b}|\\text{Prj}_{\\vec{b}}\\vec{a}$。\n$\\vec{a}\\cdot\\vec{b}=(a_x,a_y,a_z)\\cdot(b_x,b_y,b_z)=a_xb_x+a_yb_y+a_zb_z$。\n$\\vec{a}\\cdot\\vec{b}=\\vert\\vec{a}\\vert\\vert\\vec{b}\\vert\\cos\\theta$，则$\\cos\\theta=\\dfrac{\\vec{a}\\cdot\\vec{b}}{\\vert a\\vert\\vert b\\vert}=\\dfrac{a_xb_x+a_yb_y+a_zb_z}{\\sqrt{a_x^2+a_y^2+a_z^2}\\cdot\\sqrt{b_x^2+b_y^2+b_z^2}}$，其中$\\theta$为$\\vec{a},\\vec{b}$夹角。\n$a\\bot b\\Leftrightarrow\\theta=\\dfrac{\\pi}{2}\\Leftrightarrow a\\cdot b=\\vert a\\vert\\vert b\\vert\\cos\\theta=0\\Leftrightarrow a_xb_x+a_yb_y+a_zb_z=0$。\n向量积（叉积、外积） 对两个向量$\\vec{a},\\vec{b}$，其叉乘记作$a\\times b$，定义为：\n一个向量。\n该向量模为$\\vert a\\vert\\vert b\\vert\\sin\\theta$（以 $\\vec{a}$ 和 $\\vec{b}$ 为边的平行四边形的面积），其中$\\theta$是$\\vec{a}$和$\\vec{b}$的夹角。\n该向量具有这样的方向，使得：$\\vec{a}, \\vec{b}, \\vec{a}\\times\\vec{b}$形成的三元组符合右手系。 也可以这样理解：叉积的结果携带了两个属性，即面积和手性垂直面的单位向量。\n向量积的性质 夹角：$\\vec{a}//\\vec{b}\\Leftrightarrow\\dfrac{a_x}{b_x}=\\dfrac{a_y}{b_y}=\\dfrac{a_z}{b_z}\\Leftrightarrow\\vec{a}\\times\\vec{b}=0\\Leftrightarrow\\theta=0或\\pi$。 分母当然不能为$0$，懒得写整式了。\n反身：$\\vec{a}\\times\\vec{a}=0$\n手性：$\\vec{a} \\times \\vec{b} = - \\vec{b} \\times \\vec{a}$\n标量乘法结合律：$(k \\vec{a}) \\times \\vec{b} = k (\\vec{a} \\times \\vec{b})$\n加法分配律：$\\vec{a} \\times (\\vec{b} + \\vec{c}) = \\vec{a} \\times \\vec{b} + \\vec{a} \\times \\vec{c}$\n几何意义 根据定义，叉积的模是两向量所围的平行四边形的面积。\n计算方式 天花乱坠的推导 垂直的充要条件是数量积为$0$，这会得到两个方程：\n$a_x c_x + a_y c_y + a_z c_z = 0$\n$b_x c_x + b_y c_y + b_z c_z = 0$\n接下来：\n任选一个未知数作为自由变量，比如 $c_z = t$。\n两个方程变成：$\\begin{cases} a_x c_x + a_y c_y = -a_z t \\\\ b_x c_x + b_y c_y = -b_z t \\end{cases}$\n这是一个二维线性方程组，解得：$c_x = \\frac{-a_z t b_y + b_z t a_y}{a_x b_y - a_y b_x},\\quad c_y = \\frac{-b_z t a_x + a_z t b_x}{a_x b_y - a_y b_x}$\n最后得到：$\\vec{c}_0 = (c_x, c_y, t)$\n方向归一化，然后乘上 $|\\vec{a}\\times\\vec{b}|$就得到真正的叉积向量：$\\vec{a}\\times\\vec{b} = \\frac{\\vec{c}_0}{|\\vec{c}_0|} |\\vec{a}\\times\\vec{b}|$\n不易记忆的精华 由上，归纳出：\n$$\\boxed{\\vec{a}\\times\\vec{b} =(a_y b_z - a_z b_y,\\quad a_z b_x - a_x b_z,\\quad a_x b_y - a_y b_x)}$$相对容易的记法 可用“行列式”来简记上述公式。\n$$\\vec{a}\\times\\vec{b}=\\left\\vert\\begin{array}{ccc} \\vec{e_x} \u0026 \\vec{e_y} \u0026 \\vec{e_z} \\\\ a_x \u0026 a_y \u0026 a_z \\\\ b_x \u0026 b_y \u0026 b_z \\end{array}\\right\\vert$$可以直接按第一行展开，也可以用对角线法展开然后再整理。\n邪修啊 [!NOTES] 高中的记忆··· 高中讲过一招快速求法向量。操作步骤是这样的：分两行把两个向量坐标写两遍，划去首尾行，然后逐行地，求与下一行形成的主副对角线的差。每行求得的结果恰好分别是$x,y,z$坐标。 $$\\begin{array}{} \u003e \\bcancel{x_a} \u0026 y_a \u0026 z_a \u0026 x_a \u0026 y_a \u0026 \\bcancel{z_a} \\\\ \u003e \\bcancel{x_b} \u0026 y_b \u0026 z_b \u0026 x_b \u0026 y_b \u0026 \\bcancel{z_b} \u003e \\end{array}$$ 是的，这就是叉乘。我真服了高中的邪修了，还是这个好记哈。\n混合积 对三个向量$\\vec{a},\\vec{b},\\vec{c}$，其混合积定义为$(\\vec{a} \\times \\vec{b}) \\cdot \\vec{c}$（或$\\vec{a} \\cdot (\\vec{b} \\times \\vec{c})$），记作$[\\vec{a}\\vec{b}\\vec{c}]$。\n[!NOTES] 为什么 $(\\vec{a} \\times \\vec{b}) \\cdot \\vec{c}=\\vec{a} \\cdot (\\vec{b} \\times \\vec{c})$ ？！ 从几何上，实际上就做了两件事：求面积，投影出高然后乘起来。 只要向量的环绕顺序不变（$\\mathbf{a}→\\mathbf{b}→\\mathbf{c}$），空间的手性就不变。求哪个面的面积和它的高并不重要。\n几何意义 混合积的大小表示在空间中三个向量围成平行六面体的体积。\n混合积的符号表示在空间中三个向量的手性：即符合右手系为正，反之则为负。\n计算方式 显然，混合积的几何意义与三阶矩阵的行列式高度重合。所以很自然地有：\n若向量$\\vec{a}=(x_a,y_a,z_a),\\vec{b}=(x_b,y_b,z_b),\\vec{c}=(x_c,y_c,z_c)$，则：\n$$[\\vec{a}\\vec{b}\\vec{c}] = \\begin{vmatrix} x_a \u0026 y_a \u0026 z_a \\\\ x_b \u0026 y_b \u0026 z_b \\\\ x_c \u0026 y_c \u0026 z_c \\end{vmatrix}$$",
+  "wordCount" : "356",
+  "inLanguage": "en",
+  "datePublished": "2026-03-21T00:00:00Z",
+  "dateModified": "2026-03-21T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://mirror995.github.io/%E7%AC%94%E8%AE%B0/%E5%90%91%E9%87%8F%E5%8F%8A%E5%85%B6%E8%BF%90%E7%AE%97/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "残垣拾遗",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://mirror995.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://mirror995.github.io/" accesskey="h" title="残垣拾遗 (Alt + H)">残垣拾遗</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://mirror995.github.io/categories/note/" title="笔记">
+                    <span>笔记</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://mirror995.github.io/categories/me/" title="介绍">
+                    <span>介绍</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://mirror995.github.io/">Home</a></div>
+    <h1 class="post-title entry-hint-parent">
+      向量及其运算
+    </h1>
+    <div class="post-meta"><span title='2026-03-21 00:00:00 +0000 UTC'>March 21, 2026</span>
+
+</div>
+  </header> 
+  <ul class="post-tags">
+    <li><a href="https://mirror995.github.io/tags/mathematics/">Mathematics</a></li>
+  </ul>
+  <br><div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%e7%a9%ba%e9%97%b4%e7%9b%b4%e8%a7%92%e5%9d%90%e6%a0%87%e7%b3%bb" aria-label="空间直角坐标系">空间直角坐标系</a><ul>
+                        
+                <li>
+                    <a href="#%e5%8f%b3%e6%89%8b%e7%b3%bb" aria-label="右手系">右手系</a></li>
+                <li>
+                    <a href="#%e5%8d%a6%e9%99%90" aria-label="卦限">卦限</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e5%85%b1%e7%ba%bf%e5%90%91%e9%87%8f%e5%9f%ba%e6%9c%ac%e5%ae%9a%e7%90%86" aria-label="共线向量基本定理">共线向量基本定理</a></li>
+                <li>
+                    <a href="#%e5%90%91%e9%87%8f%e7%9a%84%e5%a4%b9%e8%a7%92" aria-label="向量的夹角">向量的夹角</a></li>
+                <li>
+                    <a href="#%e5%90%91%e9%87%8f%e7%9a%84%e6%96%b9%e5%90%91%e8%a7%92" aria-label="向量的方向角">向量的方向角</a><ul>
+                        
+                <li>
+                    <a href="#%e6%96%b9%e5%90%91%e4%bd%99%e5%bc%a6" aria-label="方向余弦">方向余弦</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e5%90%91%e9%87%8f%e7%9a%84%e6%8a%95%e5%bd%b1" aria-label="向量的投影">向量的投影</a><ul>
+                        
+                <li>
+                    <a href="#%e5%ae%9a%e4%b9%89" aria-label="定义">定义</a></li>
+                <li>
+                    <a href="#%e7%94%a8%e5%9d%90%e6%a0%87%e8%ae%a1%e7%ae%97" aria-label="用坐标计算">用坐标计算</a></li>
+                <li>
+                    <a href="#%e6%8a%95%e5%bd%b1%e5%90%91%e9%87%8f" aria-label="投影向量">投影向量</a></li>
+                <li>
+                    <a href="#%e6%80%a7%e8%b4%a8" aria-label="性质">性质</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e6%95%b0%e9%87%8f%e7%a7%af%e7%82%b9%e7%a7%af%e5%86%85%e7%a7%af" aria-label="数量积（点积、内积）">数量积（点积、内积）</a></li>
+                <li>
+                    <a href="#%e5%90%91%e9%87%8f%e7%a7%af%e5%8f%89%e7%a7%af%e5%a4%96%e7%a7%af" aria-label="向量积（叉积、外积）">向量积（叉积、外积）</a><ul>
+                        
+                <li>
+                    <a href="#%e5%90%91%e9%87%8f%e7%a7%af%e7%9a%84%e6%80%a7%e8%b4%a8" aria-label="向量积的性质">向量积的性质</a></li>
+                <li>
+                    <a href="#%e5%87%a0%e4%bd%95%e6%84%8f%e4%b9%89" aria-label="几何意义">几何意义</a></li>
+                <li>
+                    <a href="#%e8%ae%a1%e7%ae%97%e6%96%b9%e5%bc%8f" aria-label="计算方式">计算方式</a><ul>
+                        
+                <li>
+                    <a href="#%e5%a4%a9%e8%8a%b1%e4%b9%b1%e5%9d%a0%e7%9a%84%e6%8e%a8%e5%af%bc" aria-label="天花乱坠的推导">天花乱坠的推导</a></li>
+                <li>
+                    <a href="#%e4%b8%8d%e6%98%93%e8%ae%b0%e5%bf%86%e7%9a%84%e7%b2%be%e5%8d%8e" aria-label="不易记忆的精华">不易记忆的精华</a></li>
+                <li>
+                    <a href="#%e7%9b%b8%e5%af%b9%e5%ae%b9%e6%98%93%e7%9a%84%e8%ae%b0%e6%b3%95" aria-label="相对容易的记法">相对容易的记法</a></li>
+                <li>
+                    <a href="#%e9%82%aa%e4%bf%ae%e5%95%8a" aria-label="邪修啊">邪修啊</a></li></ul>
+                </li></ul>
+                </li>
+                <li>
+                    <a href="#%e6%b7%b7%e5%90%88%e7%a7%af" aria-label="混合积">混合积</a><ul>
+                        
+                <li>
+                    <a href="#%e5%87%a0%e4%bd%95%e6%84%8f%e4%b9%89-1" aria-label="几何意义">几何意义</a></li>
+                <li>
+                    <a href="#%e8%ae%a1%e7%ae%97%e6%96%b9%e5%bc%8f-1" aria-label="计算方式">计算方式</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h1 id="空间直角坐标系">空间直角坐标系<a hidden class="anchor" aria-hidden="true" href="#空间直角坐标系">#</a></h1>
+<h2 id="右手系">右手系<a hidden class="anchor" aria-hidden="true" href="#右手系">#</a></h2>
+<p><strong>俯视</strong>$xOy$面，若$y$轴正方向可以通过将$x$轴正方向逆时针旋转$\frac{\pi}{2}$得到，则为<em>右手系</em>。</p>
+<h2 id="卦限">卦限<a hidden class="anchor" aria-hidden="true" href="#卦限">#</a></h2>
+<p>让三个坐标轴将空间分为$8$部分：三个坐标轴正方向确定的空间称为第一卦限，其正下方的空间为第五卦限。分别向这两个卦限的逆时针方向看，各个空间分别是：第二、三、四卦限；第六、七、八卦限。也可用罗马数字 $\text{I},\cdot\cdot\cdot,\text{VIII}$ 简记。</p>
+<h1 id="共线向量基本定理">共线向量基本定理<a hidden class="anchor" aria-hidden="true" href="#共线向量基本定理">#</a></h1>
+<p>设$\vec{a}\neq\vec{0}$，那么向量$\vec{b}$与$\vec{a}$共线的充要条件是：存在唯一实数$λ$，使得$\vec{b}=λ\vec{a}$。</p>
+<h1 id="向量的夹角">向量的夹角<a hidden class="anchor" aria-hidden="true" href="#向量的夹角">#</a></h1>
+<p>两向量在同一起点时，两条边围成的<strong>较小的</strong>角为向量的<em>夹角</em>，记作$(\widehat{\vec{a}, \vec{b}})$。$(\widehat{\vec{a}, \vec{b}})\in[0,\pi]$。</p>
+<p>特别地，$(\widehat{\vec{a}, \vec{b}})=0$或$\pi$时，称两向量<em>平行</em>（或<em>共线</em>）；$(\widehat{\vec{a}, \vec{b}})=\frac{\pi}{2}$时称两向量<em>垂直</em>。</p>
+<h1 id="向量的方向角">向量的方向角<a hidden class="anchor" aria-hidden="true" href="#向量的方向角">#</a></h1>
+<p>非零向量分别与$x,y,z$轴的正方向的夹角为向量的<em>方向角</em>，通常记作$\alpha,\beta,\gamma$。</p>
+<h2 id="方向余弦">方向余弦<a hidden class="anchor" aria-hidden="true" href="#方向余弦">#</a></h2>
+<p>方向角的余弦值称为<em>方向余弦</em>。若向量$\vec{a}=(x,y,z)$，则：</p>
+$$\cos \alpha = \frac{x}{|\vec{a}|}, \quad \cos \beta = \frac{y}{|\vec{a}|}, \quad \cos \gamma = \frac{z}{|\vec{a}|}$$<p>并且：</p>
+$$\cos^2 \alpha + \cos^2 \beta + \cos^2 \gamma = 1$$<p>另外，$(\cos \alpha, \cos \beta, \cos \gamma)=\frac{1}{|\vec{a}|}(x,y,z)=\boxed{\vec{e}_{\vec{a}}}$。其中$\vec{e}_{\vec{a}}$是与$\vec{a}$同方向的<em>单位向量</em>。</p>
+<h1 id="向量的投影">向量的投影<a hidden class="anchor" aria-hidden="true" href="#向量的投影">#</a></h1>
+<h2 id="定义">定义<a hidden class="anchor" aria-hidden="true" href="#定义">#</a></h2>
+<p>设有两个非零向量 $\vec{a}$ 和 $\vec{b}$，夹角为 $\theta$。将 $\vec{a}$ 的终点向 $\vec{b}$ 所在的直线作垂线，从 $\vec{b}$ 的起点到垂足的这段向量，就是投影，记作$\text{Prj}_{\vec{b}}\vec{a}$或 ${(\vec{a})}_{\vec{b}}$。</p>
+$$\text{Prj}_{\vec{b}}\vec{a} = |\vec{a}| \cos \theta$$<h2 id="用坐标计算">用坐标计算<a hidden class="anchor" aria-hidden="true" href="#用坐标计算">#</a></h2>
+$$\text{Prj}_{\vec{b}}\vec{a} = \frac{\vec{a} \cdot \vec{b}}{|\vec{b}|}$$<h2 id="投影向量">投影向量<a hidden class="anchor" aria-hidden="true" href="#投影向量">#</a></h2>
+$$\vec{a}_{\text{proj}} = \left( \frac{\vec{a} \cdot \vec{b}}{|\vec{b}|^2} \right) \vec{b}$$<h2 id="性质">性质<a hidden class="anchor" aria-hidden="true" href="#性质">#</a></h2>
+<p>投影满足分配律，即 $(\vec{a}+\vec{c})$ 在 $\vec{b}$ 上的投影等于各自投影之和。</p>
+<h1 id="数量积点积内积">数量积（点积、内积）<a hidden class="anchor" aria-hidden="true" href="#数量积点积内积">#</a></h1>
+<p>以三维为例，对于两个非零向量$\vec{a},\vec{b}$：</p>
+<p>$\vec{a}\cdot\vec{b}=|\vec{a}|\text{Prj}_{\vec{a}}\vec{b}=|\vec{b}|\text{Prj}_{\vec{b}}\vec{a}$。</p>
+<p>$\vec{a}\cdot\vec{b}=(a_x,a_y,a_z)\cdot(b_x,b_y,b_z)=a_xb_x+a_yb_y+a_zb_z$。</p>
+<p>$\vec{a}\cdot\vec{b}=\vert\vec{a}\vert\vert\vec{b}\vert\cos\theta$，则$\cos\theta=\dfrac{\vec{a}\cdot\vec{b}}{\vert a\vert\vert b\vert}=\dfrac{a_xb_x+a_yb_y+a_zb_z}{\sqrt{a_x^2+a_y^2+a_z^2}\cdot\sqrt{b_x^2+b_y^2+b_z^2}}$，其中$\theta$为$\vec{a},\vec{b}$夹角。</p>
+<p>$a\bot b\Leftrightarrow\theta=\dfrac{\pi}{2}\Leftrightarrow a\cdot b=\vert a\vert\vert b\vert\cos\theta=0\Leftrightarrow a_xb_x+a_yb_y+a_zb_z=0$。</p>
+<h1 id="向量积叉积外积">向量积（叉积、外积）<a hidden class="anchor" aria-hidden="true" href="#向量积叉积外积">#</a></h1>
+<p>对两个向量$\vec{a},\vec{b}$，其叉乘记作$a\times b$，定义为：</p>
+<ol>
+<li>
+<p>一个向量。</p>
+</li>
+<li>
+<p>该向量模为$\vert a\vert\vert b\vert\sin\theta$（以 $\vec{a}$ 和 $\vec{b}$ 为边的平行四边形的面积），其中$\theta$是$\vec{a}$和$\vec{b}$的夹角。</p>
+</li>
+<li>
+<p>该向量具有这样的方向，使得：$\vec{a}, \vec{b}, \vec{a}\times\vec{b}$形成的三元组符合<strong>右手系</strong>。
+也可以这样理解：叉积的结果携带了两个属性，即面积和手性垂直面的单位向量。</p>
+</li>
+</ol>
+<h2 id="向量积的性质">向量积的性质<a hidden class="anchor" aria-hidden="true" href="#向量积的性质">#</a></h2>
+<ol>
+<li>
+<p>夹角：$\vec{a}//\vec{b}\Leftrightarrow\dfrac{a_x}{b_x}=\dfrac{a_y}{b_y}=\dfrac{a_z}{b_z}\Leftrightarrow\vec{a}\times\vec{b}=0\Leftrightarrow\theta=0或\pi$。
+分母当然不能为$0$，懒得写整式了。</p>
+</li>
+<li>
+<p>反身：$\vec{a}\times\vec{a}=0$</p>
+</li>
+<li>
+<p>手性：$\vec{a} \times \vec{b} = - \vec{b} \times \vec{a}$</p>
+</li>
+<li>
+<p>标量乘法结合律：$(k \vec{a}) \times \vec{b} = k (\vec{a} \times \vec{b})$</p>
+</li>
+<li>
+<p>加法分配律：$\vec{a} \times (\vec{b} + \vec{c}) = \vec{a} \times \vec{b} + \vec{a} \times \vec{c}$</p>
+</li>
+</ol>
+<h2 id="几何意义">几何意义<a hidden class="anchor" aria-hidden="true" href="#几何意义">#</a></h2>
+<p>根据定义，叉积的模是两向量所围的平行四边形的面积。</p>
+<h2 id="计算方式">计算方式<a hidden class="anchor" aria-hidden="true" href="#计算方式">#</a></h2>
+<h3 id="天花乱坠的推导">天花乱坠的推导<a hidden class="anchor" aria-hidden="true" href="#天花乱坠的推导">#</a></h3>
+<p>垂直的充要条件是数量积为$0$，这会得到两个方程：</p>
+<ul>
+<li>
+<p>$a_x c_x + a_y c_y + a_z c_z = 0$</p>
+</li>
+<li>
+<p>$b_x c_x + b_y c_y + b_z c_z = 0$</p>
+</li>
+</ul>
+<p>接下来：</p>
+<ol>
+<li>
+<p>任选一个未知数作为自由变量，比如 $c_z = t$。</p>
+</li>
+<li>
+<p>两个方程变成：$\begin{cases} a_x c_x + a_y c_y = -a_z t \\ b_x c_x + b_y c_y = -b_z t \end{cases}$</p>
+</li>
+<li>
+<p>这是一个二维线性方程组，解得：$c_x = \frac{-a_z t b_y + b_z t a_y}{a_x b_y - a_y b_x},\quad c_y = \frac{-b_z t a_x + a_z t b_x}{a_x b_y - a_y b_x}$</p>
+</li>
+<li>
+<p>最后得到：$\vec{c}_0 = (c_x, c_y, t)$</p>
+</li>
+<li>
+<p>方向归一化，然后乘上 $|\vec{a}\times\vec{b}|$就得到真正的叉积向量：$\vec{a}\times\vec{b} = \frac{\vec{c}_0}{|\vec{c}_0|} |\vec{a}\times\vec{b}|$</p>
+</li>
+</ol>
+<h3 id="不易记忆的精华">不易记忆的精华<a hidden class="anchor" aria-hidden="true" href="#不易记忆的精华">#</a></h3>
+<p>由上，归纳出：</p>
+$$\boxed{\vec{a}\times\vec{b} =(a_y b_z - a_z b_y,\quad a_z b_x - a_x b_z,\quad a_x b_y - a_y b_x)}$$<h3 id="相对容易的记法">相对容易的记法<a hidden class="anchor" aria-hidden="true" href="#相对容易的记法">#</a></h3>
+<p>可用“行列式”来简记上述公式。</p>
+$$\vec{a}\times\vec{b}=\left\vert\begin{array}{ccc}
+        \vec{e_x} & \vec{e_y} & \vec{e_z} \\
+        a_x & a_y & a_z \\
+        b_x & b_y & b_z
+    \end{array}\right\vert$$<p>可以直接按第一行展开，也可以用对角线法展开然后再整理。</p>
+<h3 id="邪修啊">邪修啊<a hidden class="anchor" aria-hidden="true" href="#邪修啊">#</a></h3>
+<blockquote>
+<p>[!NOTES] 高中的记忆···
+高中讲过一招快速求法向量。操作步骤是这样的：分两行把两个向量坐标写两遍，划去首尾行，然后逐行地，求与下一行形成的主副对角线的差。每行求得的结果恰好分别是$x,y,z$坐标。
+</p>
+$$\begin{array}{}
+>    \bcancel{x_a} & y_a & z_a & x_a & y_a & \bcancel{z_a} \\
+>    \bcancel{x_b} & y_b & z_b & x_b & y_b & \bcancel{z_b}
+> \end{array}$$<p>
+是的，这就是叉乘。我真服了高中的邪修了，还是这个好记哈。</p>
+</blockquote>
+<h1 id="混合积">混合积<a hidden class="anchor" aria-hidden="true" href="#混合积">#</a></h1>
+<p>对三个向量$\vec{a},\vec{b},\vec{c}$，其混合积定义为$(\vec{a} \times \vec{b}) \cdot \vec{c}$（或$\vec{a} \cdot (\vec{b} \times \vec{c})$），记作$[\vec{a}\vec{b}\vec{c}]$。</p>
+<blockquote>
+<p>[!NOTES] 为什么 $(\vec{a} \times \vec{b}) \cdot \vec{c}=\vec{a} \cdot (\vec{b} \times \vec{c})$ ？！
+从几何上，实际上就做了两件事：求面积，投影出高然后乘起来。
+只要向量的环绕顺序不变（$\mathbf{a}→\mathbf{b}→\mathbf{c}$），空间的手性就不变。求哪个面的面积和它的高并不重要。</p>
+</blockquote>
+<h2 id="几何意义-1">几何意义<a hidden class="anchor" aria-hidden="true" href="#几何意义-1">#</a></h2>
+<p>混合积的<strong>大小</strong>表示在空间中三个向量围成平行六面体的体积。</p>
+<p>混合积的<strong>符号</strong>表示在空间中三个向量的手性：即符合右手系为正，反之则为负。</p>
+<h2 id="计算方式-1">计算方式<a hidden class="anchor" aria-hidden="true" href="#计算方式-1">#</a></h2>
+<p>显然，混合积的几何意义与三阶矩阵的行列式高度重合。所以很自然地有：</p>
+<p>若向量$\vec{a}=(x_a,y_a,z_a),\vec{b}=(x_b,y_b,z_b),\vec{c}=(x_c,y_c,z_c)$，则：</p>
+$$[\vec{a}\vec{b}\vec{c}] =
+\begin{vmatrix}
+x_a & y_a & z_a \\
+x_b & y_b & z_b \\
+x_c & y_c & z_c
+\end{vmatrix}$$
+
+  </div>
+
+  <footer class="post-footer">
+  </footer><script src="https://giscus.app/client.js"
+        data-repo="Mirror995/blog_comments"
+        data-repo-id="R_kgDOQjTHcQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOQjTHcc4Czcb-"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="preferred_color_scheme"
+        data-lang="zh-CN"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://mirror995.github.io/">残垣拾遗</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

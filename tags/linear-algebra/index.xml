@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Linear Algebra on 残垣拾遗</title>
+    <link>http://localhost:1313/tags/linear-algebra/</link>
+    <description>Recent content in Linear Algebra on 残垣拾遗</description>
+    <generator>Hugo -- 0.152.2</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 25 Mar 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/linear-algebra/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>线性方程组和行列式</title>
+      <link>http://localhost:1313/%E7%AC%94%E8%AE%B0/%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E5%92%8C%E8%A1%8C%E5%88%97%E5%BC%8F/</link>
+      <pubDate>Wed, 25 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/%E7%AC%94%E8%AE%B0/%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E5%92%8C%E8%A1%8C%E5%88%97%E5%BC%8F/</guid>
+      <description>&lt;h1 id=&#34;行列式的引入&#34;&gt;行列式的引入&lt;/h1&gt;
+&lt;p&gt;对于如下的二元一次方程组
+&lt;/p&gt;
+$$
+\begin{cases}
+    a_{11}x+a_{12}y=c_1  \\ 
+    a_{21}x+a_{22}y=c_2 
+\end{cases}
+$$&lt;p&gt;
+容易消元得到它的两个解：&lt;/p&gt;
+$$x_1=\frac{D_1}{D}=\frac{c_1a_{22}-a_{12}c_2}{a_{11}a_{22}-a_{12}a_{21}},\quad x_2=\frac{D_2}{D}=\frac{a_{11}c_2-c_1a_{21}}{a_{11}a_{22}-a_{12}a_{21}}$$&lt;p&gt;
+规定如下的结构表示解的分母，即：&lt;/p&gt;
+$$D=\begin{vmatrix}a_{11} &amp; a_{12} \\  a_{21} &amp; a_{22}\end{vmatrix}=a_{11}a_{22}-a_{12}a_{21}$$&lt;p&gt;
+这样用竖线和数把多项式的表示称为&lt;em&gt;行列式&lt;/em&gt;。确切地，这是一个二阶行列式。
+随后发现：将行列式的两列分别替换为方程组等号右侧的常数，行列式将分别表示两个解的分子，即：
+&lt;/p&gt;
+$$D_1=\begin{vmatrix}c_1 &amp; a_{12} \\  c_2 &amp; a_{22}\end{vmatrix}=c_1a_{22}-a_{12}c_2,\quad D_2=\begin{vmatrix}a_{11} &amp; c_1 \\ a_{21} &amp; c_2\end{vmatrix}=a_{11}c_2-c_1a_{21}$$&lt;h2 id=&#34;解的判定&#34;&gt;解的判定&lt;/h2&gt;
+&lt;p&gt;对于二元一次方程组，$D \neq 0$时方程有唯一解；而$D = 0$时有多组解或无解（分别对应：$c_1 = c_2$时、其他情况时）。
+&lt;strong&gt;克拉默/克莱姆法则（Cramer&amp;rsquo;s Rule）&lt;/strong&gt;：对 $n$ 元一次方程组，若系数行列式 $D \neq 0$，则方程组有唯一解，且解可以表示为：
+&lt;/p&gt;
+$$
+x_i = \frac{D_i}{D} \quad (i=1,2,\dots,n)
+$$&lt;p&gt;
+其中 $D_i$ 是把 $D$ 中第 $i$ 列替换为常数项列得到的行列式。&lt;/p&gt;
+&lt;h2 id=&#34;几何意义&#34;&gt;几何意义&lt;/h2&gt;
+&lt;p&gt;二阶行列式表示由两个二维向量作为邻边所构成的平行四边形的&lt;strong&gt;有向面积&lt;/strong&gt;，其绝对值即为面积，符号反映向量的方向关系。&lt;/p&gt;
+&lt;h1 id=&#34;三阶行列式&#34;&gt;三阶行列式&lt;/h1&gt;
+&lt;p&gt;相似地，有三阶行列式：
+&lt;/p&gt;
+$$
+\left|\begin{array}{ccc} 
+    a_{11} &amp; a_{12} &amp; a_{13} \\ 
+    a_{21} &amp; a_{22} &amp; a_{23} \\ 
+    a_{31} &amp; a_{32} &amp; a_{33}
+\end{array}\right| 
+=a_{11}a_{22}a_{33}+a_{12}a_{23}a_{31}+a_{13}a_{21}a_{32}-a_{13}a_{22}a_{31}-a_{11}a_{23}a_{32}+a_{12}a_{21}a_{33}$$&lt;p&gt;观察三阶行列式的下标：每项的$3$个元素均来自不同行、不同列。不看符号时任意一项总可以写成$a_{1p_1}a_{2p_2}a_{3p_3}$，而且$p_1p_2p_3$所有出现的情形恰好正是$\{1,2,3\}$的全排列；其中：带正号的三项列标排列是$123,231,312$，带负号的三项列标排列是$132,213,321$。即，&lt;strong&gt;列标的排列为偶排列时，这一项带正号；为奇排列的带负号&lt;/strong&gt;。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
