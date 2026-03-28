@@ -11,7 +11,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="canonical" href="https://mirror995.github.io/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.216bb70c00adacbc0d326564580c738bd55af9abbca1590f7e752351e5d0243f.css" integrity="sha256-IWu3DACtrLwNMmVkWAxzi9Va&#43;au8oVkPfnUjUeXQJD8=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.fd49f8b8dd3c62043f1d32f79251d62bb48d8004499ad1f9c2c3cb6fd3375b5f.css" integrity="sha256-/Un4uN08YgQ/HTL3klHWK7SNgARJmtH5wsPLb9M3W18=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://mirror995.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://mirror995.github.io/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://mirror995.github.io/favicon-32x32.png">
@@ -174,7 +174,7 @@
     gap: 0.5em;
     margin-bottom: 1.25rem;
     font-weight: 600;
-    color: #1e293b;
+    color: var(--primary);
   }
 
    
@@ -184,15 +184,15 @@
     padding: 1.1rem 1.25rem;  
     text-decoration: none;
     color: inherit;
-    border-bottom: 1px solid #f1f5f9;
+    border-bottom: 1px solid var(--border);
     transition: all 0.2s ease;
     border-radius: 6px;
     margin-bottom: 6px;
-    background: #ffffff;
+    background: var(--entry);
   }
 
   .post-entry:hover {
-    background: #f8fafc;
+    filter: brightness(0.98);
     transform: translateX(4px);
   }
 
@@ -201,16 +201,16 @@
     line-height: 1.4;
     margin-bottom: 0.35rem;
     font-weight: 600;
-    color: #0f172a;
+    color: var(--primary);
     transition: color 0.2s;
   }
 
   .post-entry:hover .post-title {
-    color: #1d4ed8;
+    color: var(--content);
   }
 
   .post-date {
-    color: #64748b;
+    color: var(--secondary);
     font-size: 0.92rem;
     letter-spacing: 0.01em;
     font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
@@ -223,7 +223,7 @@
   .post-date::before {
     content: "•";
     font-weight: bold;
-    color: #94a3b8;
+    color: var(--tertiary);
   }
 
   @media (min-width: 768px) {
@@ -254,7 +254,7 @@
       left: 1.25rem;  
       right: 1.25rem;  
       height: 1px;
-      background: linear-gradient(90deg, transparent, #cbd5e1 50%, transparent);
+      background: linear-gradient(90deg, transparent, var(--border) 50%, transparent);
       opacity: 0;
       transition: opacity 0.3s;
     }
@@ -263,6 +263,7 @@
       opacity: 1;
     }
   }
+
 </style>
 <script>
   const url = new URL(window.location.href);

@@ -22,7 +22,7 @@
 再想到别的再追加吧。">
 <meta name="author" content="">
 <link rel="canonical" href="https://mirror995.github.io/%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/%E9%A5%AE%E9%A3%9F%E5%81%8F%E5%A5%BD/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.216bb70c00adacbc0d326564580c738bd55af9abbca1590f7e752351e5d0243f.css" integrity="sha256-IWu3DACtrLwNMmVkWAxzi9Va&#43;au8oVkPfnUjUeXQJD8=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.fd49f8b8dd3c62043f1d32f79251d62bb48d8004499ad1f9c2c3cb6fd3375b5f.css" integrity="sha256-/Un4uN08YgQ/HTL3klHWK7SNgARJmtH5wsPLb9M3W18=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://mirror995.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://mirror995.github.io/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://mirror995.github.io/favicon-32x32.png">
@@ -246,21 +246,64 @@
   </div>
 
   <footer class="post-footer">
-  </footer><script src="https://giscus.app/client.js"
-        data-repo="Mirror995/blog_comments"
-        data-repo-id="R_kgDOQjTHcQ"
-        data-category="Announcements"
-        data-category-id="DIC_kwDOQjTHcc4Czcb-"
-        data-mapping="title"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="top"
-        data-theme="preferred_color_scheme"
-        data-lang="zh-CN"
-        data-loading="lazy"
-        crossorigin="anonymous"
-        async>
+  </footer><div id="giscus"></div>
+<script>
+  (function () {
+    const lightTheme = "light";
+    const darkTheme = "dark";
+
+    const resolveTheme = () => {
+      const htmlTheme = document.documentElement.dataset.theme;
+      if (htmlTheme === "dark") {
+        return darkTheme;
+      }
+      if (htmlTheme === "light") {
+        return lightTheme;
+      }
+      return window.matchMedia("(prefers-color-scheme: dark)").matches ? darkTheme : lightTheme;
+    };
+
+    const setGiscusTheme = (theme) => {
+      const iframe = document.querySelector("iframe.giscus-frame");
+      if (!iframe) {
+        return;
+      }
+      iframe.contentWindow.postMessage(
+        { giscus: { setConfig: { theme } } },
+        "https://giscus.app"
+      );
+    };
+
+    const loadGiscus = () => {
+      const script = document.createElement("script");
+      script.src = "https://giscus.app/client.js";
+      script.setAttribute("data-repo", "Mirror995/blog_comments");
+      script.setAttribute("data-repo-id", "R_kgDOQjTHcQ");
+      script.setAttribute("data-category", "Announcements");
+      script.setAttribute("data-category-id", "DIC_kwDOQjTHcc4Czcb-");
+      script.setAttribute("data-mapping", "title");
+      script.setAttribute("data-strict", "0");
+      script.setAttribute("data-reactions-enabled", "1");
+      script.setAttribute("data-emit-metadata", "0");
+      script.setAttribute("data-input-position", "top");
+      script.setAttribute("data-theme", resolveTheme());
+      script.setAttribute("data-lang", "zh-CN");
+      script.setAttribute("data-loading", "lazy");
+      script.crossOrigin = "anonymous";
+      script.async = true;
+      document.getElementById("giscus").appendChild(script);
+    };
+
+    loadGiscus();
+
+    const observer = new MutationObserver(() => {
+      setGiscusTheme(resolveTheme());
+    });
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"],
+    });
+  })();
 </script>
 
 </article>

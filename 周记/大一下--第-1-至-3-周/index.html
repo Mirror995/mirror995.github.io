@@ -56,7 +56,7 @@
 然后瞎忙忙。就来写这个了。">
 <meta name="author" content="">
 <link rel="canonical" href="https://mirror995.github.io/%E5%91%A8%E8%AE%B0/%E5%A4%A7%E4%B8%80%E4%B8%8B--%E7%AC%AC-1-%E8%87%B3-3-%E5%91%A8/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.216bb70c00adacbc0d326564580c738bd55af9abbca1590f7e752351e5d0243f.css" integrity="sha256-IWu3DACtrLwNMmVkWAxzi9Va&#43;au8oVkPfnUjUeXQJD8=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.fd49f8b8dd3c62043f1d32f79251d62bb48d8004499ad1f9c2c3cb6fd3375b5f.css" integrity="sha256-/Un4uN08YgQ/HTL3klHWK7SNgARJmtH5wsPLb9M3W18=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://mirror995.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://mirror995.github.io/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://mirror995.github.io/favicon-32x32.png">
@@ -409,28 +409,151 @@
 
   </div>
 
-  <footer class="post-footer"><div style="display:flex;justify-content:space-between;align-items:flex-start;padding:16px 0;border-top:1px solid #eaeaea;border-bottom:1px solid #eaeaea;margin:28px 0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif"><div style="flex:1;text-align:left;min-width:0">
-      <a href="https://mirror995.github.io/%E5%91%A8%E8%AE%B0/%E5%A4%A7%E4%B8%80%E4%B8%8A--%E7%AC%AC19%E5%91%A8/" style="text-decoration:none;color:#0366d6;display:inline-block;padding:4px 0" onmouseenter="this.style.textDecoration='underline'" onmouseleave="this.style.textDecoration='none'">
-        <span style="font-size:0.92em;opacity:0.8">← Prev</span><br>
-        <strong style="font-weight:500;color:#1f2328;display:block;margin:2px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">大一上 · 第19周</strong>
-        <span style="font-size:0.85em;color:#6a737d">2026-01-10</span>
+  <footer class="post-footer"><style>
+    .post-nav-links {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 16px 0;
+      border-top: 1px solid #eaeaea;
+      border-bottom: 1px solid #eaeaea;
+      margin: 28px 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    }
+
+    .post-nav-link {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .post-nav-link.right {
+      text-align: right;
+    }
+
+    .post-nav-link a {
+      text-decoration: none;
+      color: #0366d6;
+      display: inline-block;
+      padding: 4px 0;
+    }
+
+    .post-nav-link a:hover {
+      text-decoration: underline;
+    }
+
+    .post-nav-meta {
+      font-size: 0.92em;
+      opacity: 0.8;
+    }
+
+    .post-nav-title {
+      font-weight: 500;
+      color: #1f2328;
+      display: block;
+      margin: 2px 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .post-nav-date {
+      font-size: 0.85em;
+      color: #6a737d;
+    }
+
+    .post-nav-divider {
+      align-self: center;
+      padding: 0 12px;
+      color: #adbac7;
+      font-size: 1.1em;
+    }
+
+    html[data-theme="dark"] .post-nav-links {
+      border-top: 1px solid rgba(148, 163, 184, 0.2);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+    }
+
+    html[data-theme="dark"] .post-nav-link a {
+      color: #93c5fd;
+    }
+
+    html[data-theme="dark"] .post-nav-title {
+      color: #e2e8f0;
+    }
+
+    html[data-theme="dark"] .post-nav-date {
+      color: #94a3b8;
+    }
+
+    html[data-theme="dark"] .post-nav-divider {
+      color: #64748b;
+    }
+  </style>
+  <div class="post-nav-links"><div class="post-nav-link left">
+      <a href="https://mirror995.github.io/%E5%91%A8%E8%AE%B0/%E5%A4%A7%E4%B8%80%E4%B8%8A--%E7%AC%AC19%E5%91%A8/">
+        <span class="post-nav-meta">← Prev</span><br>
+        <strong class="post-nav-title">大一上 · 第19周</strong>
+        <span class="post-nav-date">2026-01-10</span>
       </a>
     </div><div></div></div>
-  </footer><script src="https://giscus.app/client.js"
-        data-repo="Mirror995/blog_comments"
-        data-repo-id="R_kgDOQjTHcQ"
-        data-category="Announcements"
-        data-category-id="DIC_kwDOQjTHcc4Czcb-"
-        data-mapping="title"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="top"
-        data-theme="preferred_color_scheme"
-        data-lang="zh-CN"
-        data-loading="lazy"
-        crossorigin="anonymous"
-        async>
+  </footer><div id="giscus"></div>
+<script>
+  (function () {
+    const lightTheme = "light";
+    const darkTheme = "dark";
+
+    const resolveTheme = () => {
+      const htmlTheme = document.documentElement.dataset.theme;
+      if (htmlTheme === "dark") {
+        return darkTheme;
+      }
+      if (htmlTheme === "light") {
+        return lightTheme;
+      }
+      return window.matchMedia("(prefers-color-scheme: dark)").matches ? darkTheme : lightTheme;
+    };
+
+    const setGiscusTheme = (theme) => {
+      const iframe = document.querySelector("iframe.giscus-frame");
+      if (!iframe) {
+        return;
+      }
+      iframe.contentWindow.postMessage(
+        { giscus: { setConfig: { theme } } },
+        "https://giscus.app"
+      );
+    };
+
+    const loadGiscus = () => {
+      const script = document.createElement("script");
+      script.src = "https://giscus.app/client.js";
+      script.setAttribute("data-repo", "Mirror995/blog_comments");
+      script.setAttribute("data-repo-id", "R_kgDOQjTHcQ");
+      script.setAttribute("data-category", "Announcements");
+      script.setAttribute("data-category-id", "DIC_kwDOQjTHcc4Czcb-");
+      script.setAttribute("data-mapping", "title");
+      script.setAttribute("data-strict", "0");
+      script.setAttribute("data-reactions-enabled", "1");
+      script.setAttribute("data-emit-metadata", "0");
+      script.setAttribute("data-input-position", "top");
+      script.setAttribute("data-theme", resolveTheme());
+      script.setAttribute("data-lang", "zh-CN");
+      script.setAttribute("data-loading", "lazy");
+      script.crossOrigin = "anonymous";
+      script.async = true;
+      document.getElementById("giscus").appendChild(script);
+    };
+
+    loadGiscus();
+
+    const observer = new MutationObserver(() => {
+      setGiscusTheme(resolveTheme());
+    });
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"],
+    });
+  })();
 </script>
 
 </article>
