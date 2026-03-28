@@ -245,6 +245,21 @@
     }
   }
 
+  @media (max-width: 767px) {
+    .home-section-divider {
+      height: 1px;
+      margin: 0.75rem 1.25rem;
+      background: linear-gradient(90deg, transparent, rgba(203, 213, 225, 0.95) 50%, transparent);
+      opacity: 0.9;
+      flex: none;
+    }
+
+    html[data-theme="dark"] .home-section-divider {
+      background: linear-gradient(90deg, transparent, rgba(148, 163, 184, 0.4) 50%, transparent);
+      opacity: 1;
+    }
+  }
+
    
   @media (prefers-reduced-motion: no-preference) {
     .post-entry::after {
@@ -334,6 +349,8 @@
       </a>
     
   </section>
+
+  <div class="home-section-divider" aria-hidden="true"></div>
 
   <section class="home-section home-weekly">
     <h2 class="section-title">📅 周记</h2>
