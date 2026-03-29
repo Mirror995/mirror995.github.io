@@ -37,5 +37,20 @@ $$\text{Prj}_{\vec{b}}\vec{a} = \frac{\vec{a} \cdot \vec{b}}{|\vec{b}|}$$&lt;h2 
 $$\vec{a}_{\text{proj}} = \left( \frac{\vec{a} \cdot \vec{b}}{|\vec{b}|^2} \right) \vec{b}$$&lt;h2 id=&#34;性质&#34;&gt;性质&lt;/h2&gt;
 &lt;p&gt;投影满足分配律，即 $(\vec{a}+\vec{c})$ 在 $\vec{b}$ 上的投影等于各自投影之和。&lt;/p&gt;</description>
     </item>
+    <item>
+      <title>UEFI下Windows多系统</title>
+      <link>https://mirror995.github.io/%E5%85%B6%E4%BB%96/uefi%E4%B8%8Bwindows%E5%A4%9A%E7%B3%BB%E7%BB%9F/</link>
+      <pubDate>Thu, 10 Feb 2022 00:00:00 +0000</pubDate>
+      <guid>https://mirror995.github.io/%E5%85%B6%E4%BB%96/uefi%E4%B8%8Bwindows%E5%A4%9A%E7%B3%BB%E7%BB%9F/</guid>
+      <description>&lt;p&gt;最近有特殊需求，必须换系统环境：虚拟机带不动，而 Windows 沙盒的数据又不保留，于是想到了多系统。接下来大体讲一下这是如何进行的。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;划分出两块空间，分别用作 EFP 和系统分区。&lt;/li&gt;
+&lt;li&gt;在目标分区安装。（图）&lt;/li&gt;
+&lt;li&gt;修复引导，使其建立在新建的 ESP 上。&lt;/li&gt;
+&lt;li&gt;安装多系统引导工具，我安装的是 rEFInd。&lt;/li&gt;
+&lt;li&gt;使 rEFInd 位于启动序列顶端。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;最终效果如图：（图）&lt;/p&gt;</description>
+    </item>
   </channel>
 </rss>

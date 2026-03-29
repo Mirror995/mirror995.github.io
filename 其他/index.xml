@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>其他s on 残垣拾遗</title>
+    <link>https://mirror995.github.io/%E5%85%B6%E4%BB%96/</link>
+    <description>Recent content in 其他s on 残垣拾遗</description>
+    <generator>Hugo -- 0.152.2</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 10 Feb 2022 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://mirror995.github.io/%E5%85%B6%E4%BB%96/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>UEFI下Windows多系统</title>
+      <link>https://mirror995.github.io/%E5%85%B6%E4%BB%96/uefi%E4%B8%8Bwindows%E5%A4%9A%E7%B3%BB%E7%BB%9F/</link>
+      <pubDate>Thu, 10 Feb 2022 00:00:00 +0000</pubDate>
+      <guid>https://mirror995.github.io/%E5%85%B6%E4%BB%96/uefi%E4%B8%8Bwindows%E5%A4%9A%E7%B3%BB%E7%BB%9F/</guid>
+      <description>&lt;p&gt;最近有特殊需求，必须换系统环境：虚拟机带不动，而 Windows 沙盒的数据又不保留，于是想到了多系统。接下来大体讲一下这是如何进行的。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;划分出两块空间，分别用作 EFP 和系统分区。&lt;/li&gt;
+&lt;li&gt;在目标分区安装。（图）&lt;/li&gt;
+&lt;li&gt;修复引导，使其建立在新建的 ESP 上。&lt;/li&gt;
+&lt;li&gt;安装多系统引导工具，我安装的是 rEFInd。&lt;/li&gt;
+&lt;li&gt;使 rEFInd 位于启动序列顶端。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;最终效果如图：（图）&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>总感觉自己好懒</title>
+      <link>https://mirror995.github.io/%E5%85%B6%E4%BB%96/%E6%80%BB%E6%84%9F%E8%A7%89%E8%87%AA%E5%B7%B1%E5%A5%BD%E6%87%92/</link>
+      <pubDate>Tue, 08 Feb 2022 00:00:00 +0000</pubDate>
+      <guid>https://mirror995.github.io/%E5%85%B6%E4%BB%96/%E6%80%BB%E6%84%9F%E8%A7%89%E8%87%AA%E5%B7%B1%E5%A5%BD%E6%87%92/</guid>
+      <description>&lt;p&gt;😩 半个寒假过去了，真的没干啥。放假前亲口说假期要怎样怎样，结果放了假还是一如既往啊。。&lt;/p&gt;
+&lt;p&gt;　　从来不感觉这是难事，为什么它表现得却如此艰难&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Hello Hexo</title>
+      <link>https://mirror995.github.io/%E5%85%B6%E4%BB%96/hello-hexo/</link>
+      <pubDate>Mon, 07 Feb 2022 00:00:00 +0000</pubDate>
+      <guid>https://mirror995.github.io/%E5%85%B6%E4%BB%96/hello-hexo/</guid>
+      <description>&lt;p&gt;这里是 MirrorX の Space 的第一篇文章。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;谁是 MirrorX？&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;就是我了—站点的主人。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;为什么取名这个？&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;好问题，我认为这个名字足够合适。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;这里会发布什么？&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;建站的初衷是在这里分享一些动态，原因是 QQ 加的人太多不太方便、微信加的长辈太多不方便、微博太难用不方便、Twitter 需要代理不方便…&lt;br&gt;
+我把这里视作公开日记，也就是随便写写罢了。&lt;br&gt;
+由于 Hexo 是静态引擎而我又懒得配置 Webhook，所以只能定时(05:00、08:00、10:00、12:00、14:00、16:00 、18:00 、20:00 和 22:00)刷新页面。当然，比较重要的文章推送后就会立刻刷新。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>关于</title>
+      <link>https://mirror995.github.io/%E5%85%B6%E4%BB%96/%E6%97%A7%E8%87%AA%E4%BB%8B/</link>
+      <pubDate>Mon, 07 Feb 2022 00:00:00 +0000</pubDate>
+      <guid>https://mirror995.github.io/%E5%85%B6%E4%BB%96/%E6%97%A7%E8%87%AA%E4%BB%8B/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;15岁，是高中生。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;　　若是要写点什么来介绍自己的话，果然还是得从外观说起……身高180+，戴眼镜，颜值不突出。&lt;br&gt;
+　　个性应该是比较随和的类型。在很小就跟PC结下了不解之缘，说电脑陪我长大的真是毫不过分。&lt;br&gt;
+　　小时候对计算机的OS很感兴趣。使用官方安装方式(setup.exe)安装过Windows Vista到10的所有系统。三年级学会了制作可引导介质，启动过一次Ubuntu Live CD。七八年级时由于偶然的机会，接触到了使自己的电脑启动macOS的办法(黑苹果)，对苹果的设计语言一见钟情。那之后便成为了深刻的果粉。&lt;br&gt;
+　　因此最喜欢的两位电子设备，Macbook Pro和Nintendo Switch中的第一个就确定了下来，这方面的梦想便是有一天能集齐苹果全家桶。&lt;br&gt;
+　　游戏方面，喜欢解密游戏但是总是被卡关挫败；角色扮演非常对味；音乐游戏会玩一些，但是挺菜的。最喜欢的游戏是《塞尔达传说：旷野之息》。曾经很喜欢Minecraft，远古时期就想要拥有一个自己的服务器。六七年级，这一梦想得以实现。印象特别深刻的是六年级的时候，一整节数学课都在考虑服务器要怎么建设。然而随着年龄的增长，那一热忱消失得一干二净，服务器也无心运营。现在甚至认为Minecraft是“很低级的游戏”。&lt;br&gt;
+　　但是说到Minecraft，它也带给我许多。毫不留情地说，我从小到大所有的朋友没有一人没接触过Minecraft。现在看来这真的是十分不可思议的现象。最难能可贵的是尽管Minecraft本身几乎没有社交性质，但我从它中收获了很多的网络朋友，我的社交从而变得不再封闭。&lt;br&gt;
+　　说了游戏就不免说一下学习。目前的话，学习还是挺菜的。有很重的拖延症，经常不想写作业以至于一直拖沓到deadline附近。最拿得出手的科目是英语，对待它总是极度自信。&lt;br&gt;
+　　虽然高考摆在面前，但是生活除了学习还有很多。一直以来都很喜欢音乐，可惜在高中阶段想抽出时间去学实在很难。疫情期间由于太无聊，学习了些许Java(后转到Kotlin)，尽管技艺不精，但那种思维方式使我受益匪浅。&lt;br&gt;
+　　就说这么多吧。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
