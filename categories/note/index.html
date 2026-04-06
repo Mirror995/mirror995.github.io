@@ -153,6 +153,26 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">微信聊天记录数据库解密工作流
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>准备工作 获取到auth_info_key_prefs.xml和EnMicroMsg.db。由于操作简单，笔者不赘述。
+具体操作 首先打开auth_info_key_prefs.xml，记录_auth_uin字段的值。
+然后计算数据库密码，公式为：
+$$\text{key} = \text{substr}(\text{MD5}(1234567890ABCDEF[\_auth\_uin]),0,7)$$ 很多人说拼在_auth_uin前面的是IMEI。不过注意到高版本微信为了符合安卓规范，并不申请“电话”权限，因此该部分实为硬编码的初始值。
+然后无脑复制粘贴下面的命令：
+brew install sqlcipher sqlcipher EnMicroMsg.db PRAGMA key = &#39;[KEY HERE]&#39;; PRAGMA cipher_use_hmac = off; PRAGMA kdf_iter = 4000; PRAGMA cipher_page_size = 1024; PRAGMA cipher_hmac_algorithm = HMAC_SHA1; PRAGMA cipher_kdf_algorithm = PBKDF2_HMAC_SHA1; ATTACH DATABASE &#39;plaintext.db&#39; AS plaintext KEY &#39;&#39;; SELECT sqlcipher_export(&#39;plaintext&#39;); DETACH DATABASE plaintext; 实用工具 一条龙计算器 密码计算 计算 第三方网页 https://tool.chinaz.com/tools/md5.aspx，选择32位(小)
+参考文献 https://blog.greycode.top/posts/android-wechat-bak
+https://www.imtrq.com/archives/3644
+</p>
+  </div>
+  <footer class="entry-footer"><span title='2026-04-05 00:00:00 +0000 UTC'>April 5, 2026</span></footer>
+  <a class="entry-link" aria-label="post link to 微信聊天记录数据库解密工作流" href="https://mirror995.github.io/%E7%AC%94%E8%AE%B0/%E5%BE%AE%E4%BF%A1%E6%95%B0%E6%8D%AE%E5%BA%93/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">向量及其运算
     </h2>
   </header>

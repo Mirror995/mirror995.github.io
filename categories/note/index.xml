@@ -6,8 +6,57 @@
     <description>Recent content in 笔记 on 残垣拾遗</description>
     <generator>Hugo -- 0.152.2</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 21 Mar 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 05 Apr 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://mirror995.github.io/categories/note/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>微信聊天记录数据库解密工作流</title>
+      <link>https://mirror995.github.io/%E7%AC%94%E8%AE%B0/%E5%BE%AE%E4%BF%A1%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+      <pubDate>Sun, 05 Apr 2026 00:00:00 +0000</pubDate>
+      <guid>https://mirror995.github.io/%E7%AC%94%E8%AE%B0/%E5%BE%AE%E4%BF%A1%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
+      <description>&lt;h1 id=&#34;准备工作&#34;&gt;准备工作&lt;/h1&gt;
+&lt;p&gt;获取到&lt;code&gt;auth_info_key_prefs.xml&lt;/code&gt;和&lt;code&gt;EnMicroMsg.db&lt;/code&gt;。由于操作简单，笔者不赘述。&lt;/p&gt;
+&lt;h1 id=&#34;具体操作&#34;&gt;具体操作&lt;/h1&gt;
+&lt;p&gt;首先打开&lt;code&gt;auth_info_key_prefs.xml&lt;/code&gt;，记录&lt;code&gt;_auth_uin&lt;/code&gt;字段的值。&lt;br&gt;
+然后计算数据库密码，公式为：&lt;br&gt;
+&lt;/p&gt;
+$$\text{key} = \text{substr}(\text{MD5}(1234567890ABCDEF[\_auth\_uin]),0,7)$$&lt;blockquote&gt;
+&lt;p&gt;很多人说拼在&lt;code&gt;_auth_uin&lt;/code&gt;前面的是IMEI。不过注意到高版本微信为了符合安卓规范，并不申请“电话”权限，因此该部分实为硬编码的初始值。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;然后无脑复制粘贴下面的命令：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;brew install sqlcipher
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sqlcipher EnMicroMsg.db
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-SQL&#34; data-lang=&#34;SQL&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;PRAGMA &lt;span style=&#34;color:#66d9ef&#34;&gt;key&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;[KEY HERE]&amp;#39;&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;PRAGMA cipher_use_hmac &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;off&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;PRAGMA kdf_iter &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;4000&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;PRAGMA cipher_page_size &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1024&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;PRAGMA cipher_hmac_algorithm &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; HMAC_SHA1;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;PRAGMA cipher_kdf_algorithm &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; PBKDF2_HMAC_SHA1;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ATTACH &lt;span style=&#34;color:#66d9ef&#34;&gt;DATABASE&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;plaintext.db&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;AS&lt;/span&gt; plaintext &lt;span style=&#34;color:#66d9ef&#34;&gt;KEY&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; sqlcipher_export(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;plaintext&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;DETACH &lt;span style=&#34;color:#66d9ef&#34;&gt;DATABASE&lt;/span&gt; plaintext;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;实用工具&#34;&gt;实用工具&lt;/h1&gt;
+&lt;h2 id=&#34;一条龙计算器&#34;&gt;一条龙计算器&lt;/h2&gt;
+&lt;div style=&#34;border:1px solid #ccc;padding:16px;border-radius:8px;max-width:400px;&#34;&gt;
+  &lt;h3&gt;密码计算&lt;/h3&gt;
+  &lt;input id=&#34;inputText&#34; type=&#34;text&#34; placeholder=&#34;_auth_uin&#34;
+         style=&#34;width:100%;padding:8px;margin-bottom:10px;&#34;&gt;
+  &lt;button onclick=&#34;calcMD5()&#34; style=&#34;padding:6px 12px;&#34;&gt;计算&lt;/button&gt;
+  &lt;p id=&#34;result&#34; style=&#34;margin-top:10px;color:#555;&#34;&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;script src=&#34;https://cdn.jsdelivr.net/npm/blueimp-md5/js/md5.min.js&#34;&gt;&lt;/script&gt;
+&lt;script&gt;
+function calcMD5() {
+  const input = &#34;1234567890ABCDEF&#34; + document.getElementById(&#39;inputText&#39;).value;
+  const hash = md5(input).toLowerCase().slice(0, 7);
+  document.getElementById(&#39;result&#39;).innerText = &#34;密码为： &#34; + hash;
+}
+&lt;/script&gt;
+&lt;h2 id=&#34;第三方网页&#34;&gt;第三方网页&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://tool.chinaz.com/tools/md5.aspx&#34;&gt;https://tool.chinaz.com/tools/md5.aspx&lt;/a&gt;，选择32位(小)&lt;/p&gt;
+&lt;h1 id=&#34;参考文献&#34;&gt;参考文献&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.greycode.top/posts/android-wechat-bak&#34;&gt;https://blog.greycode.top/posts/android-wechat-bak&lt;/a&gt;&lt;br&gt;
+&lt;a href=&#34;https://www.imtrq.com/archives/3644&#34;&gt;https://www.imtrq.com/archives/3644&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
     <item>
       <title>向量及其运算</title>
       <link>https://mirror995.github.io/%E7%AC%94%E8%AE%B0/%E5%90%91%E9%87%8F%E5%8F%8A%E5%85%B6%E8%BF%90%E7%AE%97/</link>
