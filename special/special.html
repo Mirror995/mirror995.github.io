@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Letter</title>
+<title>Passage</title>
 
 <style>
 /* ===== 主题变量 ===== */
@@ -338,7 +338,7 @@ async function handleUnlock() {
   }
 
   unlockBtn.disabled = true;
-  unlockBtn.textContent = "解锁中...";
+  unlockBtn.textContent = "…";
   try {
     const html = await decryptLetter(password);
     decryptedHtmlCache = html;
