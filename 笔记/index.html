@@ -161,6 +161,32 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">记在macOS为aria2c配置TLS
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p> source:
+https://aria2.github.io/manual/en/html/aria2c.html#cmdoption-certificate
+引 事情的起因是这样的。我在用一个用户脚本批量下载B站视频，要用aria2的RPC，可是无论如何也连不上。
+我打开亲爱的JavaScript控制台，发现赫然写着：
+&gt; [Error] Not allowed to request resource &gt; [Error] XMLHttpRequest cannot load http://127.0.0.1:6800/jsonrpc due to access control checks. 我就知道，肯定是神秘的Safari浏览器发力了。
+用了很多办法，终究没能让可恶的Safari放行这个“不安全”的请求。
+我灵机一动：只要让它“变得安全”，不就解决了？
+一 创建证书 openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout aria2.key -out aria2.crt -subj &#34;/CN=localhost&#34; 复制粘贴回车执行。
+二 信任证书 双击打开证书。在出现的页面里检索“localhost”一项，双击。点击“信任”二级菜单，在“使用此证书时：”下拉菜单选择“始终信任”。
+三 复制证书信息 不急着关闭窗口，而是滚动到窗口最下方。找到“指纹”一栏，复制其中SHA-1一节的内容，并去除其中的空格，稍后备用，形如：2091884888D4C3FF52094FB7905DE82C058C7559。
+关闭各个窗口，与此同时，现在可以安全地删除刚刚生成的两个文件。
+四 填写证书信息 打开~/.aria2/aria2.conf，修改或添加如下条目（其他的不需要管）：
+rpc-secure=true rpc-certificate=[刚刚复制的内容，如2091884888D4C3FF52094FB7905DE82C058C7559] 保存文件，大功告成。
+敌人的护盾碎了，大功告成！
+</p>
+  </div>
+  <footer class="entry-footer"><span title='2026-06-10 00:00:00 +0000 UTC'>June 10, 2026</span></footer>
+  <a class="entry-link" aria-label="post link to 记在macOS为aria2c配置TLS" href="https://mirror995.github.io/%E7%AC%94%E8%AE%B0/%E8%AE%B0%E5%9C%A8macos%E4%B8%BAaria2c%E9%85%8D%E7%BD%AEtls/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">微信聊天记录数据库解密工作流
     </h2>
   </header>
@@ -200,6 +226,22 @@ $$\text{Prj}_{\vec{b}}\vec{a} = |\vec{a}| \cos \theta$$用坐标计算 $$\text{P
   </div>
   <footer class="entry-footer"><span title='2026-03-21 00:00:00 +0000 UTC'>March 21, 2026</span></footer>
   <a class="entry-link" aria-label="post link to 向量及其运算" href="https://mirror995.github.io/%E7%AC%94%E8%AE%B0/%E5%90%91%E9%87%8F%E5%8F%8A%E5%85%B6%E8%BF%90%E7%AE%97/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">整除理论与模运算
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>整除 设 $a, b$ 是两个整数，且 $a \ne 0$。如果存在另一个整数 $q$，使得 $b = aq$，那么就说 $b$ 可被 $a$ 整除，记作 $a \mid b$。此时称 $b$ 是 $a$ 的倍数，$a$ 是 $b$ 的约数。
+性质 若 $a \mid b$ 且 $b \mid c$，那么 $a \mid c$。
+比如$b=k_1a$，则$c=k_2b=k_1k_2a$。 若 $a \mid b$ 且 $a \mid c$，那么对任意整数 $x, y$，都有$a \mid (xb &#43; yc)$。
+比如$b=k_1a,c=k_2a$，则$xb&#43;yc=(xk_1&#43;yk_2)a$。 设整数 $m \ne 0$，那么 $a \mid b$ 等价于 $ma \mid mb$。 质数判断 一个数的因数总是成对出现，且分布在$\sqrt{n}$的两侧（或者皆为$\sqrt{n}$）。如果一个数是合数，则它一定能分解出一个$≤\sqrt{n}$ 的因子，所以只要试除到 sqrt(n) 就够了。
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2026-01-01 00:00:00 +0000 UTC'>January 1, 2026</span></footer>
+  <a class="entry-link" aria-label="post link to 整除理论与模运算" href="https://mirror995.github.io/%E7%AC%94%E8%AE%B0/%E6%95%B4%E9%99%A4%E7%90%86%E8%AE%BA%E4%B8%8E%E6%A8%A1%E8%BF%90%E7%AE%97/"></a>
 </article>
     </main>
     

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Competitive Programming on 残垣拾遗</title>
+    <link>https://mirror995.github.io/tags/competitive-programming/</link>
+    <description>Recent content in Competitive Programming on 残垣拾遗</description>
+    <generator>Hugo -- 0.152.2</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 01 Jan 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://mirror995.github.io/tags/competitive-programming/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>整除理论与模运算</title>
+      <link>https://mirror995.github.io/%E7%AC%94%E8%AE%B0/%E6%95%B4%E9%99%A4%E7%90%86%E8%AE%BA%E4%B8%8E%E6%A8%A1%E8%BF%90%E7%AE%97/</link>
+      <pubDate>Thu, 01 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>https://mirror995.github.io/%E7%AC%94%E8%AE%B0/%E6%95%B4%E9%99%A4%E7%90%86%E8%AE%BA%E4%B8%8E%E6%A8%A1%E8%BF%90%E7%AE%97/</guid>
+      <description>&lt;h1 id=&#34;整除&#34;&gt;整除&lt;/h1&gt;
+&lt;p&gt;设 $a, b$ 是两个整数，且 $a \ne 0$。如果存在另一个整数 $q$，使得 $b = aq$，那么就说 $b$ 可被 $a$ &lt;em&gt;整除&lt;/em&gt;，记作 $a \mid b$。此时称 $b$ 是 $a$ 的倍数，$a$ 是 $b$ 的约数。&lt;/p&gt;
+&lt;h2 id=&#34;性质&#34;&gt;性质&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;若 $a \mid b$ 且 $b \mid c$，那么 $a \mid c$。&lt;br&gt;
+比如$b=k_1a$，则$c=k_2b=k_1k_2a$。&lt;/li&gt;
+&lt;li&gt;若 $a \mid b$ 且 $a \mid c$，那么对任意整数 $x, y$，都有$a \mid (xb + yc)$。&lt;br&gt;
+比如$b=k_1a,c=k_2a$，则$xb+yc=(xk_1+yk_2)a$。&lt;/li&gt;
+&lt;li&gt;设整数 $m \ne 0$，那么 $a \mid b$ 等价于 $ma \mid mb$。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;质数判断&#34;&gt;质数判断&lt;/h1&gt;
+&lt;p&gt;一个数的因数总是成对出现，且分布在$\sqrt{n}$的两侧（或者皆为$\sqrt{n}$）。如果一个数是合数，则它一定能分解出一个$≤\sqrt{n}$ 的因子，所以&lt;strong&gt;只要试除到 sqrt(n) 就够了&lt;/strong&gt;。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

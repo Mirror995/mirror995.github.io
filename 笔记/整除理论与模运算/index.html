@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>整除理论与模运算 | 残垣拾遗</title>
+<meta name="keywords" content="Mathematics, Competitive Programming">
+<meta name="description" content="整除
+设 $a, b$ 是两个整数，且 $a \ne 0$。如果存在另一个整数 $q$，使得 $b = aq$，那么就说 $b$ 可被 $a$ 整除，记作 $a \mid b$。此时称 $b$ 是 $a$ 的倍数，$a$ 是 $b$ 的约数。
+性质
+
+若 $a \mid b$ 且 $b \mid c$，那么 $a \mid c$。
+比如$b=k_1a$，则$c=k_2b=k_1k_2a$。
+若 $a \mid b$ 且 $a \mid c$，那么对任意整数 $x, y$，都有$a \mid (xb &#43; yc)$。
+比如$b=k_1a,c=k_2a$，则$xb&#43;yc=(xk_1&#43;yk_2)a$。
+设整数 $m \ne 0$，那么 $a \mid b$ 等价于 $ma \mid mb$。
+
+质数判断
+一个数的因数总是成对出现，且分布在$\sqrt{n}$的两侧（或者皆为$\sqrt{n}$）。如果一个数是合数，则它一定能分解出一个$≤\sqrt{n}$ 的因子，所以只要试除到 sqrt(n) 就够了。">
+<meta name="author" content="">
+<link rel="canonical" href="https://mirror995.github.io/%E7%AC%94%E8%AE%B0/%E6%95%B4%E9%99%A4%E7%90%86%E8%AE%BA%E4%B8%8E%E6%A8%A1%E8%BF%90%E7%AE%97/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.fd49f8b8dd3c62043f1d32f79251d62bb48d8004499ad1f9c2c3cb6fd3375b5f.css" integrity="sha256-/Un4uN08YgQ/HTL3klHWK7SNgARJmtH5wsPLb9M3W18=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://mirror995.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://mirror995.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://mirror995.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://mirror995.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://mirror995.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://mirror995.github.io/%E7%AC%94%E8%AE%B0/%E6%95%B4%E9%99%A4%E7%90%86%E8%AE%BA%E4%B8%8E%E6%A8%A1%E8%BF%90%E7%AE%97/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            .list::-webkit-scrollbar-thumb {
+                border-color: var(--code-bg);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><script src="/js/encrypt.js"></script>
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      packages: {'[+]': ['ams']}
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+  };
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta property="og:url" content="https://mirror995.github.io/%E7%AC%94%E8%AE%B0/%E6%95%B4%E9%99%A4%E7%90%86%E8%AE%BA%E4%B8%8E%E6%A8%A1%E8%BF%90%E7%AE%97/">
+  <meta property="og:site_name" content="残垣拾遗">
+  <meta property="og:title" content="整除理论与模运算">
+  <meta property="og:description" content="整除 设 $a, b$ 是两个整数，且 $a \ne 0$。如果存在另一个整数 $q$，使得 $b = aq$，那么就说 $b$ 可被 $a$ 整除，记作 $a \mid b$。此时称 $b$ 是 $a$ 的倍数，$a$ 是 $b$ 的约数。
+性质 若 $a \mid b$ 且 $b \mid c$，那么 $a \mid c$。
+比如$b=k_1a$，则$c=k_2b=k_1k_2a$。 若 $a \mid b$ 且 $a \mid c$，那么对任意整数 $x, y$，都有$a \mid (xb &#43; yc)$。
+比如$b=k_1a,c=k_2a$，则$xb&#43;yc=(xk_1&#43;yk_2)a$。 设整数 $m \ne 0$，那么 $a \mid b$ 等价于 $ma \mid mb$。 质数判断 一个数的因数总是成对出现，且分布在$\sqrt{n}$的两侧（或者皆为$\sqrt{n}$）。如果一个数是合数，则它一定能分解出一个$≤\sqrt{n}$ 的因子，所以只要试除到 sqrt(n) 就够了。">
+  <meta property="og:locale" content="zh-cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="笔记">
+    <meta property="article:published_time" content="2026-01-01T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-01-01T00:00:00+00:00">
+    <meta property="article:tag" content="Mathematics">
+    <meta property="article:tag" content="Competitive Programming">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="整除理论与模运算">
+<meta name="twitter:description" content="整除
+设 $a, b$ 是两个整数，且 $a \ne 0$。如果存在另一个整数 $q$，使得 $b = aq$，那么就说 $b$ 可被 $a$ 整除，记作 $a \mid b$。此时称 $b$ 是 $a$ 的倍数，$a$ 是 $b$ 的约数。
+性质
+
+若 $a \mid b$ 且 $b \mid c$，那么 $a \mid c$。
+比如$b=k_1a$，则$c=k_2b=k_1k_2a$。
+若 $a \mid b$ 且 $a \mid c$，那么对任意整数 $x, y$，都有$a \mid (xb &#43; yc)$。
+比如$b=k_1a,c=k_2a$，则$xb&#43;yc=(xk_1&#43;yk_2)a$。
+设整数 $m \ne 0$，那么 $a \mid b$ 等价于 $ma \mid mb$。
+
+质数判断
+一个数的因数总是成对出现，且分布在$\sqrt{n}$的两侧（或者皆为$\sqrt{n}$）。如果一个数是合数，则它一定能分解出一个$≤\sqrt{n}$ 的因子，所以只要试除到 sqrt(n) 就够了。">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "整除理论与模运算",
+      "item": "https://mirror995.github.io/%E7%AC%94%E8%AE%B0/%E6%95%B4%E9%99%A4%E7%90%86%E8%AE%BA%E4%B8%8E%E6%A8%A1%E8%BF%90%E7%AE%97/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "整除理论与模运算",
+  "name": "整除理论与模运算",
+  "description": "整除 设 $a, b$ 是两个整数，且 $a \\ne 0$。如果存在另一个整数 $q$，使得 $b = aq$，那么就说 $b$ 可被 $a$ 整除，记作 $a \\mid b$。此时称 $b$ 是 $a$ 的倍数，$a$ 是 $b$ 的约数。\n性质 若 $a \\mid b$ 且 $b \\mid c$，那么 $a \\mid c$。\n比如$b=k_1a$，则$c=k_2b=k_1k_2a$。 若 $a \\mid b$ 且 $a \\mid c$，那么对任意整数 $x, y$，都有$a \\mid (xb + yc)$。\n比如$b=k_1a,c=k_2a$，则$xb+yc=(xk_1+yk_2)a$。 设整数 $m \\ne 0$，那么 $a \\mid b$ 等价于 $ma \\mid mb$。 质数判断 一个数的因数总是成对出现，且分布在$\\sqrt{n}$的两侧（或者皆为$\\sqrt{n}$）。如果一个数是合数，则它一定能分解出一个$≤\\sqrt{n}$ 的因子，所以只要试除到 sqrt(n) 就够了。\n",
+  "keywords": [
+    "Mathematics", "Competitive Programming"
+  ],
+  "articleBody": "整除 设 $a, b$ 是两个整数，且 $a \\ne 0$。如果存在另一个整数 $q$，使得 $b = aq$，那么就说 $b$ 可被 $a$ 整除，记作 $a \\mid b$。此时称 $b$ 是 $a$ 的倍数，$a$ 是 $b$ 的约数。\n性质 若 $a \\mid b$ 且 $b \\mid c$，那么 $a \\mid c$。\n比如$b=k_1a$，则$c=k_2b=k_1k_2a$。 若 $a \\mid b$ 且 $a \\mid c$，那么对任意整数 $x, y$，都有$a \\mid (xb + yc)$。\n比如$b=k_1a,c=k_2a$，则$xb+yc=(xk_1+yk_2)a$。 设整数 $m \\ne 0$，那么 $a \\mid b$ 等价于 $ma \\mid mb$。 质数判断 一个数的因数总是成对出现，且分布在$\\sqrt{n}$的两侧（或者皆为$\\sqrt{n}$）。如果一个数是合数，则它一定能分解出一个$≤\\sqrt{n}$ 的因子，所以只要试除到 sqrt(n) 就够了。\nbool isPrime(int n) { if (n \u003c= 1) return false; if (n == 2) return true; if (n % 2 == 0) return false; for (int i = 3; i * i \u003c= n; i += 2) { if (n % i == 0) return false; } return true; } 顺便一提，gcd和lcm都在里。这是数论内容，不是算法（）！\n质数筛法 引理：算术基本定理（唯一分解定理） 任何一个大于 $1$ 的自然数 $n$，都可以表示为若干个质数的乘积；并且如果不计质数因子的顺序，这种分解方式是独一无二的。数学表达式通常写作：\n$$ n = p_1^{a_1} p_2^{a_2} \\cdots p_k^{a_k} $$\n其中 $p_1 \u003c p_2 \u003c \\cdots \u003c p_k$ 是互不相同的质数，$a_i$ 是正整数。\n[!NOTE] Alt\n每个大于 $1$ 的整数都可以表示为若干个质数的乘积，而且这个表示法（质数的种类和指数）是唯一的，只是质数的排列顺序可以不同。\n埃拉托尼斯筛（埃⽒筛） 如果一个数无法被任意小于等于它的平方根的质数整除，则其为合数。\n我们可以假设质数表里，唯一已知的元素是$2$。由于$2$是质数，$2$的非$0,1$倍数都是合数。接着看$3$。$(1,\\sqrt{3}]$范围没有其他质数，所以$3$是质数。由于$3$是质数，$3$的非$0,1$倍数都是合数。……以此类推。\n由于$\\sqrt{n}$比$n$小得多，所以遍历到$n$时，如果$n$还没被标记为质数，它就必为合数。\nvector is_prime(n + 1, true); is_prime[0] = is_prime[1] = false; for (int i = 2; i \u003c= sqrt(n); i++) { if (is_prime[i]) // for (int j = i; i*j \u003c= n; j++) // j从i开始增加的原因：拥有比i小的因子的合数已经在前面被标记过了 for (int j = i * i; j \u003c= n; j += i) // 优化：数亿次的加法明显比数亿次的乘法要快 // is_prime[i * j] = false; is_prime[j] = false; } 欧拉筛法（线性筛） 没学。\n最大公因数和最小公倍数 设 $a_1, a_2$是两个整数，如果$d \\mid a_1, d \\mid a_2$，那么 $d$ 称为 $a_1$ 和 $a_2$ 的公约数。其中最大的称为最大公约数，记作$(a_1, a_2)$。\n一般地，可以类似地定义 $k$ 个整数$a_1, a_2, \\dots , a_k$的公约数和最大公约数。\n设 $a_1, a_2$ 是两个整数，如果$a_1 \\mid l, a_2 \\mid l$，那么 $l$ 称为 $a_1$ 和 $a_2$ 的公倍数。其中最小的称为最小公倍数，记作$[a_1, a_2]$\n一般地，可以类似地定义 $k$ 个整数$a_1, a_2, \\dots , a_k$的公倍数和最小公倍数。\n性质 对任意整数 $m$，有$m(a_1,a_2,\\dots,a_k)=(ma_1,ma_2,\\dots,ma_k)$。\n也就是说：如果把所有整数同时乘以 m，那么它们的最大公约数也会乘以 m。\n这个性质对最小公倍数也成立：$[ma_1,ma_2,\\dots,ma_k] = m[a_1,a_2,\\dots,a_k]$。 对任意整数 $x$，有$(a_1,a_2)=(a_1,\\;a_2+a_1x)$\n也就是说：一个数加上另一个数的任意倍数，它们的最大公约数不变。 结合律：$(a_1,a_2,\\dots,a_k) = ((a_1,a_2,\\dots,a_{k-1}),a_k)$；$[a_1,a_2,\\dots,a_k] = [[a_1,a_2,\\dots,a_{k-1}],a_k]$。 最大公因数（$\\text{gcd}$）与最小公倍数（$\\text{lcm}$）的关系\n对于任意两个正整数 $a$ 和 $b$，它们的乘积等于它们最大公约数与最小公倍数的乘积：\n$$ a \\times b = \\gcd(a, b) \\times \\text{lcm}(a, b) $$\n即：\n$$\\text{lcm}(a, b) = \\frac{a \\times b}{\\gcd(a, b)}$$ 算术基本定理的应用 推论 1：约数的性质（整除判定） • 内容：若 $d$ 是 $a$ 的约数，则 $d$ 的质因子分解式中，每个质数的幂次都不能超过 $a$ 中对应质数的幂次。\n• 数学表达：$d = p_1^{e_1}p_2^{e_2}\\cdots p_s^{e_s}$，其中 $0 \\le e_j \\le a_j$。\n• 本质：整除关系在质因子层面表现为“幂次的包含关系”。\n推论 2：最大公约数与最小公倍数 给定 $a = p_1^{\\alpha_1}\\cdots p_s^{\\alpha_s}$ 和 $b = p_1^{\\beta_1}\\cdots p_s^{\\beta_s}$：\n• 最大公约数：$(a, b) = p_1^{\\min(\\alpha_1, \\beta_1)} \\cdots p_s^{\\min(\\alpha_s, \\beta_s)}$\n• 最小公倍数：$[a, b] = p_1^{\\max(\\alpha_1, \\beta_1)} \\cdots p_s^{\\max(\\alpha_s, \\beta_s)}$\n• 重要公式：$(a, b) \\times [a, b] = p_1^{\\min(\\alpha_1, \\beta_1) + \\max(\\alpha_1, \\beta_1)}\\cdots = a \\times b$。\n推论 3：约数个数函数 $\\tau(a)$ • 内容：一个数 $a$ 的正约数总个数等于其各质因子幂次加 $1$ 后的连乘积。\n• 公式：$\\tau(a) = (\\alpha_1 + 1)(\\alpha_2 + 1) \\cdots (\\alpha_s + 1)$\n• 原理：每个质因子 $p_i$ 有 $\\alpha_i + 1$ 种取法（从 $0$ 次到 $\\alpha_i$ 次）。$a$的最大约数就是自身。\n推论 4：约数和函数 $\\sigma(a)$ • 内容：一个数 $a$ 的所有正约数之和，可以通过其质因子幂次的等比数列求和公式计算。\n• 公式：\n$$ \\begin{aligned} \\sigma(a) \u0026= (p_1^0 + p_1^1 + \\dots + p_1^{\\alpha_1}) \\times (p_2^0 + p_2^1 + \\dots + p_2^{\\alpha_2}) \\times \\dots \\times (p_s^0 + p_s^1 + \\dots + p_s^{\\alpha_s}) \\\\ \u0026= \\prod_{j=1}^{s} \\frac{p_j^{\\alpha_j+1}-1}{p_j-1} \\end{aligned} $$\n本质：利用乘法分配律，将所有可能的质因子组合相加。\n在编程中，先通过 $O(\\sqrt{n})$ 的复杂度进行质因数分解，再套用上述公式，是处理大数约数问题的标准解法。\n同余 如果两数分别的模相同，可以把两数用三条横线的等号“$\\equiv$”连接，读作“同余于”（congruent to）。同余于是模意义里的等号。正式写法是：$a \\equiv b \\pmod{m} \\iff m \\mid (a - b)$，意思是$a-b$是 $m$ 的整数倍。\n同余类（Congruence Class, Residue Class） 我们把所有与某数同余的数组成的集合称为该数在模意义下的同余类，记作$[a]_m = \\{ x \\in \\mathbb{Z} \\mid x \\equiv a \\pmod{m} \\}$。\n剩余（Residue）、代表元（Representative） 同余类中的任何一个整数都可以被称为$a$的一个剩余或$[a]_m$的这个同余类的代表元。\n负数的最小剩余 对于负数$a$，其在模$m$意义下的最小同余数为$((a \\bmod m) + m) \\bmod m$。\n逆元 定义 若存在一个数 $b^{-1}$，使得$b \\times b^{-1} \\equiv 1 \\pmod{m}$，那么 $b^{-1}$ 就叫做 $b$ 在模 $m$ 意义下的乘法逆元。\n存在性 满足$\\gcd(b, m) = 1$，也就是 $b$ 和模 $m$ 互质时，逆元存在。\n求法 维度 费马小定理 (快速幂) 扩展欧几里得 线性递推 前缀积逆元 适用范围 求单个数的逆元 求单个数的逆元 求 $[1, n]$ 所有数的逆元 离散数组逆元 对 $p$ 的要求 必须是质数 互质即可（最通用） 必须是质数 必须是质数 复杂度 $O(\\log p)$ $O(\\log p)$ $O(n)$ $O(n + \\log p)$ 额外技能 无 能解线性同余方程 $ax + by = c$ 无 无 1. 费马小定理 使用条件 满足模 $m$ 是质数，且 $b$ 不被 $m$ 整除（即 $b \\not\\equiv 0 \\pmod{m}$）。\n定理内容 $b^{m-1} \\equiv 1 \\pmod{m} \\Rightarrow b^{-1} \\equiv b^{m-2} \\pmod{m}$\n2. 扩展欧几里得法 [!NOTE] 引论：欧几里得算法（$\\gcd$）\n$\\text{gcd}(a, b) = \\text{gcd}(b,a \\bmod b)$（其中$a$和$b$是至多一个为$0$的自然数），直到$b = 0$（上一轮的$a \\bmod b = 0$）为止。欧几里得算法每次都让第二个参数变小，而又不可能无限减下去，因此最终必然出现$b = 0$，算法自然结束。严格证明不是我需要考虑的。虽然自然语言描述上$a$和$b$地位一致，但递归调用的算法实现上不能互换顺序。\ndef gcd(a, b): if (b == 0): return a return gcd(b, a % b) 这个算法虽然是递归调用但速度很快。 首先，从逆元的定义：$b\\cdot b^{-1} \\equiv 1\\pmod{m}$，则 $b\\cdot b^{-1}-1 = m \\cdot n$，其中$n \\in \\mathbb{Z}$。移项得到$b\\cdot b^{-1}- m \\cdot n = 1$，即$b\\cdot b^{-1}+ m \\cdot n = 1$。 然后，对互质的$b$和$m$，$\\text{gcd}(b, m)=1$。则$\\boxed{b\\cdot b^{-1}+ m \\cdot n = \\text{gcd}(b, m)}$。上式称为贝祖（裴蜀）定理。贝祖定理具有一般性，对不全为$0$的两个整数适用。 接下来，在实现欧几里得算法的同时求出逆元。 如果我们定义：第$n$次$\\text{gcd}$得到的贝祖等式里的字母下标为$n$，由贝祖定理，就有$a_n \\cdot x_n + b_n \\cdot y_n = \\text{gcd}(a_n,b_n) = C$。而从算法实现我们知道$a_n = b_{n-1},b_n={a_{n-1}\\bmod b_{n-1}}$，代换就有$b_{n-1} \\cdot x_n + a_{n-1}\\bmod b_{n-1} \\cdot y_n = C$。此外，模的定义告诉我们，$a_{n-1} \\bmod b_{n-1}= a_{n-1} - \\lfloor \\frac{a_{n-1}}{b_{n-1}} \\rfloor \\cdot b_{n-1}$。代入并整理有$b_{n-1} \\cdot x_{n} + a_{n-1}\\cdot y_{n} - \\lfloor \\frac{a_{n-1}}{b_{n-1}} \\rfloor \\cdot b_{n-1} \\cdot y_{n} = C$，重新回到贝祖等式的形式就是$a_{n-1}\\cdot y_{n}+b_{n-1}(x_{n} - \\lfloor \\frac{a_{n-1}}{b_{n-1}} \\rfloor \\cdot y_{n}) = C$。这说明$x_{n-1} = y_n,y_{n-1}=x_{n} - \\lfloor \\frac{a_{n-1}}{b_{n-1}} \\rfloor \\cdot y_{n}$。由此找到了递推关系。 我们知道，$b_n = 0$且$\\text{gcd}(a_n, 0) =a_n \\cdot x_{n} + b_n \\cdot 0 = a_n = C$。所以$x_{n} = 1, y_{n}=0$。由此指明了基本情况（递归的终点）。\n这样一来我们可以写出代码。 def gcd_advanced(a, b): if (b == 0): return a, 1, 0 else: gcd, x, y = gcd_advanced(b, a % b) return gcd, y, x - (a // b) * y # 最后模m可以得到最小正逆元，使答案唯一化。 # 当然，不能忘了首先要保证逆元必须存在才能使用。 def inverse(b, m): return gcd_advanced(b, m)[1] % m 3.线性递推 假设我们要计算 $i$ 的逆元（记作 $inv[i]$ 或 $i^{-1}$），且我们已经知道了 $1$ 到 $i-1$ 之间的所有逆元。我们将 $p$ 除以 $i$，得到商 $k$ 和余数 $r$：\n$$ p = k \\cdot i + r \\quad (0 \\le r \u003c i) $$\n在模 $p$ 意义下，这个等式变为：\n$$ k \\cdot i + r \\equiv 0 \\pmod p $$\n为了求出 $i^{-1}$，我们对等式两边同时乘以 $i^{-1} \\cdot r^{-1}$：\n$$ (k \\cdot i + r) \\cdot i^{-1} \\cdot r^{-1} \\equiv 0 \\cdot i^{-1} \\cdot r^{-1} \\pmod p $$$$ k \\cdot r^{-1} + i^{-1} \\equiv 0 \\pmod p $$\n移项得：\n$$ i^{-1} \\equiv -k \\cdot r^{-1} \\pmod p $$\n用自然语言：一个数的逆元正是它商和余数的逆元之积的相反数。\nint main() { ll n, p; cin \u003e\u003e n \u003e\u003e p; inv[1] = 1; cout \u003c\u003c 1 \u003c\u003c endl; for(int i = 2; i \u003c= n; i++) { ll inv_ = - (p/i mod p) * (inv[p mod i] mod p) mod p; inv_ = (inv_ mod p + p) mod p; cout \u003c\u003c inv_ \u003c\u003c endl; inv[i] = inv_; } } 4. 前缀积逆元 [!ERROR] UNDER CONSTRUCTION\n模意义下的运算 加法：$(a+b)\\pmod{M}=((a\\bmod M) + (b\\bmod M)) \\bmod M$ 减法：\n$$ \\begin{aligned} (a - b) \\pmod{M} \u0026= [(a-b)+M] \\bmod M \\\\ \u0026= ((a \\bmod M) - (b \\bmod M) + M) \\bmod M \\end{aligned} $$ 具体来说： int mod(int x){ x %= MOD; if (x \u003c 0) x += MOD; return x; } 乘法：$(a\\cdot b)\\pmod{m}= ((a\\bmod M)\\cdot(b\\bmod M)) \\bmod M$ 幂：$a^k\\pmod{m}=a^k \\bmod M = (a \\bmod M)^k \\bmod M$（用快速幂） 除法：不存在直接意义的除，而是乘除数的逆元。 ",
+  "wordCount" : "1002",
+  "inLanguage": "en",
+  "datePublished": "2026-01-01T00:00:00Z",
+  "dateModified": "2026-01-01T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://mirror995.github.io/%E7%AC%94%E8%AE%B0/%E6%95%B4%E9%99%A4%E7%90%86%E8%AE%BA%E4%B8%8E%E6%A8%A1%E8%BF%90%E7%AE%97/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "残垣拾遗",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://mirror995.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://mirror995.github.io/" accesskey="h" title="残垣拾遗 (Alt + H)">残垣拾遗</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://mirror995.github.io/categories/note/" title="笔记">
+                    <span>笔记</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://mirror995.github.io/categories/me/" title="介绍">
+                    <span>介绍</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://mirror995.github.io/">Home</a></div>
+    <h1 class="post-title entry-hint-parent">
+      整除理论与模运算
+    </h1>
+    <div class="post-meta"><span title='2026-01-01 00:00:00 +0000 UTC'>January 1, 2026</span>
+
+</div>
+  </header> 
+  <ul class="post-tags">
+    <li><a href="https://mirror995.github.io/tags/mathematics/">Mathematics</a></li>
+    <li><a href="https://mirror995.github.io/tags/competitive-programming/">Competitive Programming</a></li>
+  </ul>
+  <br><div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%e6%95%b4%e9%99%a4" aria-label="整除">整除</a><ul>
+                        
+                <li>
+                    <a href="#%e6%80%a7%e8%b4%a8" aria-label="性质">性质</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e8%b4%a8%e6%95%b0%e5%88%a4%e6%96%ad" aria-label="质数判断">质数判断</a></li>
+                <li>
+                    <a href="#%e8%b4%a8%e6%95%b0%e7%ad%9b%e6%b3%95" aria-label="质数筛法">质数筛法</a><ul>
+                        
+                <li>
+                    <a href="#%e5%bc%95%e7%90%86%e7%ae%97%e6%9c%af%e5%9f%ba%e6%9c%ac%e5%ae%9a%e7%90%86%e5%94%af%e4%b8%80%e5%88%86%e8%a7%a3%e5%ae%9a%e7%90%86" aria-label="引理：算术基本定理（唯一分解定理）">引理：算术基本定理（唯一分解定理）</a></li>
+                <li>
+                    <a href="#%e5%9f%83%e6%8b%89%e6%89%98%e5%b0%bc%e6%96%af%e7%ad%9b%e5%9f%83%e7%ad%9b" aria-label="埃拉托尼斯筛（埃⽒筛）">埃拉托尼斯筛（埃⽒筛）</a></li>
+                <li>
+                    <a href="#%e6%ac%a7%e6%8b%89%e7%ad%9b%e6%b3%95%e7%ba%bf%e6%80%a7%e7%ad%9b" aria-label="欧拉筛法（线性筛）">欧拉筛法（线性筛）</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e6%9c%80%e5%a4%a7%e5%85%ac%e5%9b%a0%e6%95%b0%e5%92%8c%e6%9c%80%e5%b0%8f%e5%85%ac%e5%80%8d%e6%95%b0" aria-label="最大公因数和最小公倍数">最大公因数和最小公倍数</a><ul>
+                        
+                <li>
+                    <a href="#%e6%80%a7%e8%b4%a8-1" aria-label="性质">性质</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e7%ae%97%e6%9c%af%e5%9f%ba%e6%9c%ac%e5%ae%9a%e7%90%86%e7%9a%84%e5%ba%94%e7%94%a8" aria-label="算术基本定理的应用">算术基本定理的应用</a><ul>
+                        
+                <li>
+                    <a href="#%e6%8e%a8%e8%ae%ba-1%e7%ba%a6%e6%95%b0%e7%9a%84%e6%80%a7%e8%b4%a8%e6%95%b4%e9%99%a4%e5%88%a4%e5%ae%9a" aria-label="推论 1：约数的性质（整除判定）">推论 1：约数的性质（整除判定）</a></li>
+                <li>
+                    <a href="#%e6%8e%a8%e8%ae%ba-2%e6%9c%80%e5%a4%a7%e5%85%ac%e7%ba%a6%e6%95%b0%e4%b8%8e%e6%9c%80%e5%b0%8f%e5%85%ac%e5%80%8d%e6%95%b0" aria-label="推论 2：最大公约数与最小公倍数">推论 2：最大公约数与最小公倍数</a></li>
+                <li>
+                    <a href="#%e6%8e%a8%e8%ae%ba-3%e7%ba%a6%e6%95%b0%e4%b8%aa%e6%95%b0%e5%87%bd%e6%95%b0" aria-label="推论 3：约数个数函数 $\tau(a)$">推论 3：约数个数函数 $\tau(a)$</a></li>
+                <li>
+                    <a href="#%e6%8e%a8%e8%ae%ba-4%e7%ba%a6%e6%95%b0%e5%92%8c%e5%87%bd%e6%95%b0" aria-label="推论 4：约数和函数 $\sigma(a)$">推论 4：约数和函数 $\sigma(a)$</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e5%90%8c%e4%bd%99" aria-label="同余">同余</a><ul>
+                        
+                <li>
+                    <a href="#%e5%90%8c%e4%bd%99%e7%b1%bbcongruence-class-residue-class" aria-label="同余类（Congruence Class, Residue Class）">同余类（Congruence Class, Residue Class）</a><ul>
+                        
+                <li>
+                    <a href="#%e5%89%a9%e4%bd%99residue%e4%bb%a3%e8%a1%a8%e5%85%83representative" aria-label="剩余（Residue）、代表元（Representative）">剩余（Residue）、代表元（Representative）</a></li>
+                <li>
+                    <a href="#%e8%b4%9f%e6%95%b0%e7%9a%84%e6%9c%80%e5%b0%8f%e5%89%a9%e4%bd%99" aria-label="负数的最小剩余">负数的最小剩余</a></li></ul>
+                </li></ul>
+                </li>
+                <li>
+                    <a href="#%e9%80%86%e5%85%83" aria-label="逆元">逆元</a><ul>
+                        
+                <li>
+                    <a href="#%e5%ae%9a%e4%b9%89" aria-label="定义">定义</a></li>
+                <li>
+                    <a href="#%e5%ad%98%e5%9c%a8%e6%80%a7" aria-label="存在性">存在性</a></li>
+                <li>
+                    <a href="#%e6%b1%82%e6%b3%95" aria-label="求法">求法</a><ul>
+                        
+                <li>
+                    <a href="#1-%e8%b4%b9%e9%a9%ac%e5%b0%8f%e5%ae%9a%e7%90%86" aria-label="1. 费马小定理">1. 费马小定理</a><ul>
+                        
+                <li>
+                    <a href="#%e4%bd%bf%e7%94%a8%e6%9d%a1%e4%bb%b6" aria-label="使用条件">使用条件</a></li>
+                <li>
+                    <a href="#%e5%ae%9a%e7%90%86%e5%86%85%e5%ae%b9" aria-label="定理内容">定理内容</a></li></ul>
+                </li>
+                <li>
+                    <a href="#2-%e6%89%a9%e5%b1%95%e6%ac%a7%e5%87%a0%e9%87%8c%e5%be%97%e6%b3%95" aria-label="2. 扩展欧几里得法">2. 扩展欧几里得法</a></li>
+                <li>
+                    <a href="#3%e7%ba%bf%e6%80%a7%e9%80%92%e6%8e%a8" aria-label="3.线性递推">3.线性递推</a></li>
+                <li>
+                    <a href="#4-%e5%89%8d%e7%bc%80%e7%a7%af%e9%80%86%e5%85%83" aria-label="4. 前缀积逆元">4. 前缀积逆元</a></li></ul>
+                </li></ul>
+                </li>
+                <li>
+                    <a href="#%e6%a8%a1%e6%84%8f%e4%b9%89%e4%b8%8b%e7%9a%84%e8%bf%90%e7%ae%97" aria-label="模意义下的运算">模意义下的运算</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h1 id="整除">整除<a hidden class="anchor" aria-hidden="true" href="#整除">#</a></h1>
+<p>设 $a, b$ 是两个整数，且 $a \ne 0$。如果存在另一个整数 $q$，使得 $b = aq$，那么就说 $b$ 可被 $a$ <em>整除</em>，记作 $a \mid b$。此时称 $b$ 是 $a$ 的倍数，$a$ 是 $b$ 的约数。</p>
+<h2 id="性质">性质<a hidden class="anchor" aria-hidden="true" href="#性质">#</a></h2>
+<ol>
+<li>若 $a \mid b$ 且 $b \mid c$，那么 $a \mid c$。<br>
+比如$b=k_1a$，则$c=k_2b=k_1k_2a$。</li>
+<li>若 $a \mid b$ 且 $a \mid c$，那么对任意整数 $x, y$，都有$a \mid (xb + yc)$。<br>
+比如$b=k_1a,c=k_2a$，则$xb+yc=(xk_1+yk_2)a$。</li>
+<li>设整数 $m \ne 0$，那么 $a \mid b$ 等价于 $ma \mid mb$。</li>
+</ol>
+<h1 id="质数判断">质数判断<a hidden class="anchor" aria-hidden="true" href="#质数判断">#</a></h1>
+<p>一个数的因数总是成对出现，且分布在$\sqrt{n}$的两侧（或者皆为$\sqrt{n}$）。如果一个数是合数，则它一定能分解出一个$≤\sqrt{n}$ 的因子，所以<strong>只要试除到 sqrt(n) 就够了</strong>。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">isPrime</span>(<span style="color:#66d9ef">int</span> n) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (n <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (n <span style="color:#f92672">==</span> <span style="color:#ae81ff">2</span>) <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (n <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>; i <span style="color:#f92672">*</span> i <span style="color:#f92672">&lt;=</span> n; i <span style="color:#f92672">+=</span> <span style="color:#ae81ff">2</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (n <span style="color:#f92672">%</span> i <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>顺便一提，gcd和lcm都在<code>&lt;numeric&gt;</code>里。这是数论内容，不是算法（<code>&lt;algorithm&gt;</code>）！</p>
+<h1 id="质数筛法">质数筛法<a hidden class="anchor" aria-hidden="true" href="#质数筛法">#</a></h1>
+<h2 id="引理算术基本定理唯一分解定理">引理：算术基本定理（唯一分解定理）<a hidden class="anchor" aria-hidden="true" href="#引理算术基本定理唯一分解定理">#</a></h2>
+<p>任何一个大于 $1$ 的自然数 $n$，都可以表示为若干个质数的乘积；并且如果不计质数因子的顺序，这种分解方式是独一无二的。数学表达式通常写作：<br>
+</p>
+$$
+n = p_1^{a_1} p_2^{a_2} \cdots p_k^{a_k}
+$$<p><br>
+其中 $p_1 < p_2 < \cdots < p_k$ 是互不相同的质数，$a_i$ 是正整数。</p>
+<blockquote>
+<p>[!NOTE] Alt<br>
+每个大于 $1$ 的整数都可以表示为若干个质数的乘积，而且这个表示法（质数的种类和指数）是唯一的，只是质数的排列顺序可以不同。</p>
+</blockquote>
+<h2 id="埃拉托尼斯筛埃筛">埃拉托尼斯筛（埃⽒筛）<a hidden class="anchor" aria-hidden="true" href="#埃拉托尼斯筛埃筛">#</a></h2>
+<p>如果一个数无法被任意小于等于它的平方根的质数整除，则其为合数。<br>
+我们可以假设质数表里，唯一已知的元素是$2$。由于$2$是质数，$2$的非$0,1$倍数都是合数。接着看$3$。$(1,\sqrt{3}]$范围没有其他质数，所以$3$是质数。由于$3$是质数，$3$的非$0,1$倍数都是合数。……以此类推。<br>
+由于$\sqrt{n}$比$n$小得多，所以遍历到$n$时，如果$n$还没被标记为质数，它就必为合数。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector <span style="color:#a6e22e">is_prime</span>(n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, true);
+</span></span><span style="display:flex;"><span>is_prime[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> is_prime[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> false;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>; i <span style="color:#f92672">&lt;=</span> sqrt(n); i<span style="color:#f92672">++</span>)  
+</span></span><span style="display:flex;"><span>{  
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (is_prime[i])  
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// for (int j = i; i*j &lt;= n; j++) // j从i开始增加的原因：拥有比i小的因子的合数已经在前面被标记过了
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> i <span style="color:#f92672">*</span> i; j <span style="color:#f92672">&lt;=</span> n; j <span style="color:#f92672">+=</span> i) <span style="color:#75715e">// 优化：数亿次的加法明显比数亿次的乘法要快
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#75715e">// is_prime[i * j] = false; 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            is_prime[j] <span style="color:#f92672">=</span> false; 
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="欧拉筛法线性筛">欧拉筛法（线性筛）<a hidden class="anchor" aria-hidden="true" href="#欧拉筛法线性筛">#</a></h2>
+<p>没学。</p>
+<h1 id="最大公因数和最小公倍数">最大公因数和最小公倍数<a hidden class="anchor" aria-hidden="true" href="#最大公因数和最小公倍数">#</a></h1>
+<p>设 $a_1, a_2$是两个整数，如果$d \mid a_1, d \mid a_2$，那么 $d$ 称为 $a_1$ 和 $a_2$ 的<em>公约数</em>。其中最大的称为<em>最大公约数</em>，记作$(a_1, a_2)$。<br>
+一般地，可以类似地定义 $k$ 个整数$a_1, a_2, \dots , a_k$的公约数和最大公约数。</p>
+<p>设 $a_1, a_2$ 是两个整数，如果$a_1 \mid l, a_2 \mid l$，那么 $l$ 称为 $a_1$ 和 $a_2$ 的<em>公倍数</em>。其中最小的称为<em>最小公倍数</em>，记作$[a_1, a_2]$<br>
+一般地，可以类似地定义 $k$ 个整数$a_1, a_2, \dots , a_k$的公倍数和最小公倍数。</p>
+<h2 id="性质-1">性质<a hidden class="anchor" aria-hidden="true" href="#性质-1">#</a></h2>
+<ol>
+<li>对任意整数 $m$，有$m(a_1,a_2,\dots,a_k)=(ma_1,ma_2,\dots,ma_k)$。<br>
+也就是说：如果把所有整数同时乘以 m，那么它们的最大公约数也会乘以 m。<br>
+这个性质对最小公倍数也成立：$[ma_1,ma_2,\dots,ma_k] = m[a_1,a_2,\dots,a_k]$。</li>
+<li>对任意整数 $x$，有$(a_1,a_2)=(a_1,\;a_2+a_1x)$<br>
+也就是说：一个数加上另一个数的任意倍数，它们的最大公约数不变。</li>
+<li>结合律：$(a_1,a_2,\dots,a_k) = ((a_1,a_2,\dots,a_{k-1}),a_k)$；$[a_1,a_2,\dots,a_k] = [[a_1,a_2,\dots,a_{k-1}],a_k]$。</li>
+<li>最大公因数（$\text{gcd}$）与最小公倍数（$\text{lcm}$）的关系<br>
+对于任意两个正整数 $a$ 和 $b$，它们的乘积等于它们最大公约数与最小公倍数的乘积：<br>
+$$
+a \times b = \gcd(a, b) \times \text{lcm}(a, b)
+$$<br>
+即：<br>
+$$\text{lcm}(a, b) = \frac{a \times b}{\gcd(a, b)}$$</li>
+</ol>
+<h1 id="算术基本定理的应用">算术基本定理的应用<a hidden class="anchor" aria-hidden="true" href="#算术基本定理的应用">#</a></h1>
+<h2 id="推论-1约数的性质整除判定">推论 1：约数的性质（整除判定）<a hidden class="anchor" aria-hidden="true" href="#推论-1约数的性质整除判定">#</a></h2>
+<p>• 内容：若 $d$ 是 $a$ 的约数，则 $d$ 的质因子分解式中，每个质数的幂次都不能超过 $a$ 中对应质数的幂次。<br>
+• 数学表达：$d = p_1^{e_1}p_2^{e_2}\cdots p_s^{e_s}$，其中 $0 \le e_j \le a_j$。<br>
+• 本质：整除关系在质因子层面表现为“幂次的包含关系”。</p>
+<h2 id="推论-2最大公约数与最小公倍数">推论 2：最大公约数与最小公倍数<a hidden class="anchor" aria-hidden="true" href="#推论-2最大公约数与最小公倍数">#</a></h2>
+<p>给定 $a = p_1^{\alpha_1}\cdots p_s^{\alpha_s}$ 和 $b = p_1^{\beta_1}\cdots p_s^{\beta_s}$：<br>
+• 最大公约数：$(a, b) = p_1^{\min(\alpha_1, \beta_1)} \cdots p_s^{\min(\alpha_s, \beta_s)}$<br>
+• 最小公倍数：$[a, b] = p_1^{\max(\alpha_1, \beta_1)} \cdots p_s^{\max(\alpha_s, \beta_s)}$<br>
+• 重要公式：$(a, b) \times [a, b] = p_1^{\min(\alpha_1, \beta_1) + \max(\alpha_1, \beta_1)}\cdots = a \times b$。</p>
+<h2 id="推论-3约数个数函数">推论 3：约数个数函数 $\tau(a)$<a hidden class="anchor" aria-hidden="true" href="#推论-3约数个数函数">#</a></h2>
+<p>• 内容：一个数 $a$ 的正约数总个数等于其各质因子幂次加 $1$ 后的连乘积。<br>
+• 公式：$\tau(a) = (\alpha_1 + 1)(\alpha_2 + 1) \cdots (\alpha_s + 1)$<br>
+• 原理：每个质因子 $p_i$ 有 $\alpha_i + 1$ 种取法（从 $0$ 次到 $\alpha_i$ 次）。$a$的最大约数就是自身。</p>
+<h2 id="推论-4约数和函数">推论 4：约数和函数 $\sigma(a)$<a hidden class="anchor" aria-hidden="true" href="#推论-4约数和函数">#</a></h2>
+<p>• 内容：一个数 $a$ 的所有正约数之和，可以通过其质因子幂次的等比数列求和公式计算。<br>
+• 公式：<br>
+</p>
+$$
+\begin{aligned}
+    \sigma(a) &= (p_1^0 + p_1^1 + \dots + p_1^{\alpha_1}) \times (p_2^0 + p_2^1 + \dots + p_2^{\alpha_2}) \times \dots \times (p_s^0 + p_s^1 + \dots + p_s^{\alpha_s}) \\
+            &= \prod_{j=1}^{s} \frac{p_j^{\alpha_j+1}-1}{p_j-1}
+\end{aligned}
+$$<p><br>
+本质：利用乘法分配律，将所有可能的质因子组合相加。<br>
+在编程中，先通过 $O(\sqrt{n})$ 的复杂度进行质因数分解，再套用上述公式，是处理大数约数问题的标准解法。</p>
+<h1 id="同余">同余<a hidden class="anchor" aria-hidden="true" href="#同余">#</a></h1>
+<p>如果两数分别的模相同，可以把两数用三条横线的等号“$\equiv$”连接，读作“同余于”（congruent to）。同余于是模意义里的等号。正式写法是：$a \equiv b \pmod{m} \iff m \mid (a - b)$，意思是$a-b$是 $m$ 的整数倍。</p>
+<h2 id="同余类congruence-class-residue-class">同余类（Congruence Class, Residue Class）<a hidden class="anchor" aria-hidden="true" href="#同余类congruence-class-residue-class">#</a></h2>
+<p>我们把所有与某数同余的数组成的集合称为该数在模意义下的<strong>同余类</strong>，记作$[a]_m = \{ x \in \mathbb{Z} \mid x \equiv a \pmod{m} \}$。</p>
+<h3 id="剩余residue代表元representative">剩余（Residue）、代表元（Representative）<a hidden class="anchor" aria-hidden="true" href="#剩余residue代表元representative">#</a></h3>
+<p>同余类中的任何一个整数都可以被称为$a$的一个<strong>剩余</strong>或$[a]_m$的这个同余类的<strong>代表元</strong>。</p>
+<h3 id="负数的最小剩余">负数的最小剩余<a hidden class="anchor" aria-hidden="true" href="#负数的最小剩余">#</a></h3>
+<p>对于负数$a$，其在模$m$意义下的最小同余数为$((a \bmod m) + m) \bmod m$。</p>
+<h1 id="逆元">逆元<a hidden class="anchor" aria-hidden="true" href="#逆元">#</a></h1>
+<h2 id="定义">定义<a hidden class="anchor" aria-hidden="true" href="#定义">#</a></h2>
+<p>若存在一个数 $b^{-1}$，使得$b \times b^{-1} \equiv 1 \pmod{m}$，那么 $b^{-1}$ 就叫做 $b$ 在模 $m$ 意义下的乘法<em>逆元</em>。</p>
+<h2 id="存在性">存在性<a hidden class="anchor" aria-hidden="true" href="#存在性">#</a></h2>
+<p>满足$\gcd(b, m) = 1$，也就是 $b$ 和模 $m$ 互质时，逆元存在。</p>
+<h2 id="求法">求法<a hidden class="anchor" aria-hidden="true" href="#求法">#</a></h2>
+<table>
+  <thead>
+      <tr>
+          <th><strong>维度</strong></th>
+          <th><strong>费马小定理 (快速幂)</strong></th>
+          <th><strong>扩展欧几里得</strong></th>
+          <th><strong>线性递推</strong></th>
+          <th><strong>前缀积逆元</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>适用范围</strong></td>
+          <td>求<strong>单个数</strong>的逆元</td>
+          <td>求<strong>单个数</strong>的逆元</td>
+          <td>求 $[1, n]$ <strong>所有</strong>数的逆元</td>
+          <td>离散数组逆元</td>
+      </tr>
+      <tr>
+          <td><strong>对 $p$ 的要求</strong></td>
+          <td>必须是质数</td>
+          <td><strong>互质即可</strong>（最通用）</td>
+          <td>必须是质数</td>
+          <td>必须是质数</td>
+      </tr>
+      <tr>
+          <td><strong>复杂度</strong></td>
+          <td>$O(\log p)$</td>
+          <td>$O(\log p)$</td>
+          <td>$O(n)$</td>
+          <td>$O(n + \log p)$</td>
+      </tr>
+      <tr>
+          <td><strong>额外技能</strong></td>
+          <td>无</td>
+          <td>能解线性同余方程 $ax + by = c$</td>
+          <td>无</td>
+          <td>无</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="1-费马小定理">1. 费马小定理<a hidden class="anchor" aria-hidden="true" href="#1-费马小定理">#</a></h3>
+<h4 id="使用条件">使用条件<a hidden class="anchor" aria-hidden="true" href="#使用条件">#</a></h4>
+<p>满足模 $m$ 是质数，且 $b$ 不被 $m$ 整除（即 $b \not\equiv 0 \pmod{m}$）。</p>
+<h4 id="定理内容">定理内容<a hidden class="anchor" aria-hidden="true" href="#定理内容">#</a></h4>
+<p>$b^{m-1} \equiv 1 \pmod{m} \Rightarrow b^{-1} \equiv b^{m-2} \pmod{m}$</p>
+<h3 id="2-扩展欧几里得法">2. 扩展欧几里得法<a hidden class="anchor" aria-hidden="true" href="#2-扩展欧几里得法">#</a></h3>
+<blockquote>
+<p>[!NOTE] 引论：欧几里得算法（$\gcd$）<br>
+$\text{gcd}(a, b) = \text{gcd}(b,a \bmod b)$（其中$a$和$b$是至多一个为$0$的自然数），直到$b = 0$（上一轮的$a \bmod b = 0$）为止。欧几里得算法每次都让第二个参数变小，而又不可能无限减下去，因此最终必然出现$b = 0$，算法自然结束。严格证明不是我需要考虑的。虽然自然语言描述上$a$和$b$地位一致，但递归调用的算法实现上不能互换顺序。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">gcd</span>(a, b):
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> (b <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>):
+</span></span><span style="display:flex;"><span>  	<span style="color:#66d9ef">return</span> a
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> gcd(b, a <span style="color:#f92672">%</span> b)
+</span></span></code></pre></div><ul>
+<li>这个算法虽然是递归调用但速度很快。</li>
+</ul>
+</blockquote>
+<ul>
+<li>首先，从逆元的定义：$b\cdot b^{-1} \equiv 1\pmod{m}$，则 $b\cdot b^{-1}-1 = m \cdot n$，其中$n \in \mathbb{Z}$。移项得到$b\cdot b^{-1}-  m \cdot n = 1$，即$b\cdot b^{-1}+ m \cdot n = 1$。</li>
+<li>然后，对互质的$b$和$m$，$\text{gcd}(b, m)=1$。则$\boxed{b\cdot b^{-1}+ m \cdot n = \text{gcd}(b, m)}$。上式称为<em>贝祖（裴蜀）定理</em>。贝祖定理具有一般性，对不全为$0$的两个<strong>整数</strong>适用。</li>
+<li>接下来，在实现欧几里得算法的同时求出逆元。</li>
+<li>如果我们定义：第$n$次$\text{gcd}$得到的贝祖等式里的字母下标为$n$，由贝祖定理，就有$a_n \cdot x_n + b_n \cdot y_n = \text{gcd}(a_n,b_n) = C$。而从算法实现我们知道$a_n = b_{n-1},b_n={a_{n-1}\bmod b_{n-1}}$，代换就有$b_{n-1} \cdot x_n + a_{n-1}\bmod b_{n-1} \cdot y_n = C$。此外，模的定义告诉我们，$a_{n-1} \bmod b_{n-1}= a_{n-1} - \lfloor \frac{a_{n-1}}{b_{n-1}} \rfloor \cdot b_{n-1}$。代入并整理有$b_{n-1} \cdot x_{n} + a_{n-1}\cdot y_{n} - \lfloor \frac{a_{n-1}}{b_{n-1}} \rfloor \cdot b_{n-1} \cdot y_{n} = C$，重新回到贝祖等式的形式就是$a_{n-1}\cdot y_{n}+b_{n-1}(x_{n} - \lfloor \frac{a_{n-1}}{b_{n-1}} \rfloor \cdot y_{n}) = C$。这说明$x_{n-1} = y_n,y_{n-1}=x_{n} - \lfloor \frac{a_{n-1}}{b_{n-1}} \rfloor \cdot y_{n}$。由此找到了递推关系。</li>
+<li>我们知道，$b_n = 0$且$\text{gcd}(a_n, 0) =a_n \cdot x_{n} + b_n \cdot 0 = a_n = C$。所以$x_{n} = 1, y_{n}=0$。由此指明了基本情况（递归的终点）。<br>
+这样一来我们可以写出代码。</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">gcd_advanced</span>(a, b):
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> (b <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>):
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> a, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>		gcd, x, y <span style="color:#f92672">=</span> gcd_advanced(b, a <span style="color:#f92672">%</span> b)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> gcd, y, x <span style="color:#f92672">-</span> (a <span style="color:#f92672">//</span> b) <span style="color:#f92672">*</span> y
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 最后模m可以得到最小正逆元，使答案唯一化。</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 当然，不能忘了首先要保证逆元必须存在才能使用。</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">inverse</span>(b, m):
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> gcd_advanced(b, m)[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">%</span> m
+</span></span></code></pre></div><h3 id="3线性递推">3.线性递推<a hidden class="anchor" aria-hidden="true" href="#3线性递推">#</a></h3>
+<p>假设我们要计算 $i$ 的逆元（记作 $inv[i]$ 或 $i^{-1}$），且我们已经知道了 $1$ 到 $i-1$ 之间的所有逆元。我们将 $p$ 除以 $i$，得到商 $k$ 和余数 $r$：<br>
+</p>
+$$
+p = k \cdot i + r \quad (0 \le r < i)
+$$<p><br>
+在模 $p$ 意义下，这个等式变为：</p>
+$$
+k \cdot i + r \equiv 0 \pmod p
+$$<p><br>
+为了求出 $i^{-1}$，我们对等式两边同时乘以 $i^{-1} \cdot r^{-1}$：</p>
+$$
+(k \cdot i + r) \cdot i^{-1} \cdot r^{-1} \equiv 0 \cdot i^{-1} \cdot r^{-1} \pmod p
+$$$$
+k \cdot r^{-1} + i^{-1} \equiv 0 \pmod p
+$$<p><br>
+移项得：</p>
+$$
+i^{-1} \equiv -k \cdot r^{-1} \pmod p
+$$<p><br>
+用自然语言：<strong>一个数的逆元正是它商和余数的逆元之积的相反数。</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()  
+</span></span><span style="display:flex;"><span>{  
+</span></span><span style="display:flex;"><span>    ll n, p;  
+</span></span><span style="display:flex;"><span>    cin <span style="color:#f92672">&gt;&gt;</span> n <span style="color:#f92672">&gt;&gt;</span> p;  
+</span></span><span style="display:flex;"><span>    inv[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;  
+</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> endl;  
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>; i <span style="color:#f92672">&lt;=</span> n; i<span style="color:#f92672">++</span>)  
+</span></span><span style="display:flex;"><span>    {  
+</span></span><span style="display:flex;"><span>        ll inv_ <span style="color:#f92672">=</span> <span style="color:#f92672">-</span> (p<span style="color:#f92672">/</span>i mod p) <span style="color:#f92672">*</span> (inv[p mod i] mod p) mod p;  
+</span></span><span style="display:flex;"><span>        inv_ <span style="color:#f92672">=</span> (inv_ mod p <span style="color:#f92672">+</span> p) mod p;  
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> inv_ <span style="color:#f92672">&lt;&lt;</span> endl;  
+</span></span><span style="display:flex;"><span>        inv[i] <span style="color:#f92672">=</span> inv_;  
+</span></span><span style="display:flex;"><span>    }  
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="4-前缀积逆元">4. 前缀积逆元<a hidden class="anchor" aria-hidden="true" href="#4-前缀积逆元">#</a></h3>
+<blockquote>
+<p>[!ERROR] UNDER CONSTRUCTION</p>
+</blockquote>
+<h1 id="模意义下的运算">模意义下的运算<a hidden class="anchor" aria-hidden="true" href="#模意义下的运算">#</a></h1>
+<ul>
+<li>加法：$(a+b)\pmod{M}=((a\bmod M) + (b\bmod M)) \bmod M$</li>
+<li>减法：<br>
+$$
+\begin{aligned}
+(a - b) \pmod{M} 
+&= [(a-b)+M] \bmod M \\
+&= ((a \bmod M) - (b \bmod M) + M) \bmod M
+\end{aligned}
+$$
+<ul>
+<li>具体来说：</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">mod</span>(<span style="color:#66d9ef">int</span> x){
+</span></span><span style="display:flex;"><span>    x <span style="color:#f92672">%=</span> MOD;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (x <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>) x <span style="color:#f92672">+=</span> MOD;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> x;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>乘法：$(a\cdot b)\pmod{m}= ((a\bmod M)\cdot(b\bmod M)) \bmod M$</li>
+<li>幂：$a^k\pmod{m}=a^k \bmod M = (a \bmod M)^k \bmod M$（用快速幂）</li>
+<li>除法：不存在直接意义的除，而是乘除数的逆元。</li>
+</ul>
+
+
+  </div>
+
+  <footer class="post-footer"><style>
+    .post-nav-links {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 16px 0;
+      border-top: 1px solid #eaeaea;
+      border-bottom: 1px solid #eaeaea;
+      margin: 28px 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    }
+
+    .post-nav-link {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .post-nav-link.right {
+      text-align: right;
+    }
+
+    .post-nav-link a {
+      text-decoration: none;
+      color: #0366d6;
+      display: inline-block;
+      padding: 4px 0;
+    }
+
+    .post-nav-link a:hover {
+      text-decoration: underline;
+    }
+
+    .post-nav-meta {
+      font-size: 0.92em;
+      opacity: 0.8;
+    }
+
+    .post-nav-title {
+      font-weight: 500;
+      color: #1f2328;
+      display: block;
+      margin: 2px 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .post-nav-date {
+      font-size: 0.85em;
+      color: #6a737d;
+    }
+
+    .post-nav-divider {
+      align-self: center;
+      padding: 0 12px;
+      color: #adbac7;
+      font-size: 1.1em;
+    }
+
+    html[data-theme="dark"] .post-nav-links {
+      border-top: 1px solid rgba(148, 163, 184, 0.2);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+    }
+
+    html[data-theme="dark"] .post-nav-link a {
+      color: #93c5fd;
+    }
+
+    html[data-theme="dark"] .post-nav-title {
+      color: #e2e8f0;
+    }
+
+    html[data-theme="dark"] .post-nav-date {
+      color: #94a3b8;
+    }
+
+    html[data-theme="dark"] .post-nav-divider {
+      color: #64748b;
+    }
+  </style>
+  <div class="post-nav-links"><div class="post-nav-link left">
+      <a href="https://mirror995.github.io/%E5%85%B6%E4%BB%96/uefi%E4%B8%8Bwindows%E5%A4%9A%E7%B3%BB%E7%BB%9F/">
+        <span class="post-nav-meta">← Prev</span><br>
+        <strong class="post-nav-title">UEFI下Windows多系统</strong>
+        <span class="post-nav-date">2022-02-10</span>
+      </a>
+    </div><div class="post-nav-divider">•</div><div class="post-nav-link right">
+      <a href="https://mirror995.github.io/%E7%AC%94%E8%AE%B0/%E5%90%91%E9%87%8F%E5%8F%8A%E5%85%B6%E8%BF%90%E7%AE%97/">
+        <span class="post-nav-meta">Next →</span><br>
+        <strong class="post-nav-title">向量及其运算</strong>
+        <span class="post-nav-date">2026-03-21</span>
+      </a>
+    </div></div>
+  </footer><div id="giscus"></div>
+<script>
+  (function () {
+    const lightTheme = "light";
+    const darkTheme = "dark";
+
+    const resolveTheme = () => {
+      const htmlTheme = document.documentElement.dataset.theme;
+      if (htmlTheme === "dark") {
+        return darkTheme;
+      }
+      if (htmlTheme === "light") {
+        return lightTheme;
+      }
+      return window.matchMedia("(prefers-color-scheme: dark)").matches ? darkTheme : lightTheme;
+    };
+
+    const setGiscusTheme = (theme) => {
+      const iframe = document.querySelector("iframe.giscus-frame");
+      if (!iframe) {
+        return;
+      }
+      iframe.contentWindow.postMessage(
+        { giscus: { setConfig: { theme } } },
+        "https://giscus.app"
+      );
+    };
+
+    const loadGiscus = () => {
+      const script = document.createElement("script");
+      script.src = "https://giscus.app/client.js";
+      script.setAttribute("data-repo", "Mirror995/blog_comments");
+      script.setAttribute("data-repo-id", "R_kgDOQjTHcQ");
+      script.setAttribute("data-category", "Announcements");
+      script.setAttribute("data-category-id", "DIC_kwDOQjTHcc4Czcb-");
+      script.setAttribute("data-mapping", "title");
+      script.setAttribute("data-strict", "0");
+      script.setAttribute("data-reactions-enabled", "1");
+      script.setAttribute("data-emit-metadata", "0");
+      script.setAttribute("data-input-position", "top");
+      script.setAttribute("data-theme", resolveTheme());
+      script.setAttribute("data-lang", "zh-CN");
+      script.setAttribute("data-loading", "lazy");
+      script.crossOrigin = "anonymous";
+      script.async = true;
+      document.getElementById("giscus").appendChild(script);
+    };
+
+    loadGiscus();
+
+    const observer = new MutationObserver(() => {
+      setGiscusTheme(resolveTheme());
+    });
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"],
+    });
+  })();
+</script>
+
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://mirror995.github.io/">残垣拾遗</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
