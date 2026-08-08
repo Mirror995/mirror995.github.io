@@ -13,15 +13,22 @@
       <link>https://mirror995.github.io/categories/note/</link>
       <pubDate>Wed, 10 Jun 2026 00:00:00 +0000</pubDate>
       <guid>https://mirror995.github.io/categories/note/</guid>
-      <description>&lt;p&gt;一些自我感觉良好的笔记可能会投放在这里。不保证内容完全准确。使用AI辅助创作。&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;因为本人好懒，所以这里的笔记不会频繁更新，图一乐吧。我甚至觉得引入MathJax简直是没有必要的，完全是纯粹拖慢网页加载速度。说不定哪天我恼了就会删了。&lt;/em&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;一些自我感觉良好的笔记可能会投放在这里。不保证内容完全准确。可能使用AI辅助创作。&lt;/p&gt;
+&lt;p&gt;这里的笔记不会频繁更新，图一乐吧。欢迎勘误。&lt;/p&gt;</description>
     </item>
     <item>
       <title>关于我</title>
       <link>https://mirror995.github.io/categories/me/</link>
       <pubDate>Mon, 23 Mar 2026 00:00:00 +0000</pubDate>
       <guid>https://mirror995.github.io/categories/me/</guid>
-      <description>&lt;p&gt;&lt;em&gt;你为什么想要了解一个奇怪的人呢？&lt;/em&gt;&lt;/p&gt;</description>
+      <description>&lt;div class=&#34;callout&#34; data-callout=&#34;quote&#34;&gt;
+  &lt;div class=&#34;callout-title&#34;&gt;
+    &lt;span class=&#34;callout-icon&#34; aria-hidden=&#34;true&#34;&gt;&lt;svg xmlns=&#34;http://www.w3.org/2000/svg&#34; width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34;&gt;&lt;path d=&#34;M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2zM5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z&#34;/&gt;&lt;/svg&gt;
+&lt;/span&gt;
+    &lt;span class=&#34;callout-title-inner&#34;&gt;&amp;ldquo;Ciao, nice to meet you. Also, arrivederci.&amp;rdquo;&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class=&#34;callout-content&#34;&gt;&lt;/div&gt;
+&lt;/div&gt;</description>
     </item>
     <item>
       <title>Weekly</title>
